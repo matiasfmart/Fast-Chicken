@@ -1,0 +1,26 @@
+﻿@model  Order
+
+<div class="container order-detail p-4 m-2 shadow rounded bg-white">
+    <div class="row mb-3">
+        <h2 class="fw-bold">Pedido</h2>
+    </div>
+    <div class="row mb-3">
+        <ul class="list-group list-group-flush">
+            {orderItems && orderItems.map((item) => (
+            <ItemDetail orderItem={item} key={item.id} /> ))}
+        </ul>
+    </div>
+    <div class="row">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="p-2">
+                <h4 class="fw-bold">Total</h4>
+            </div>
+            <div class="p-2">
+                <h4 class="fw-bold">${totalOrder()}</h4>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary btn-lg fw-semibold">
+            Terminar Pedido
+        </button>
+    </div>
+</div>
