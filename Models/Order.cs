@@ -8,7 +8,6 @@
         public List<Combo> Combos { get; set; }
         public float Price { get; set; }
         public DateTime Date { get; set; }
-
         public Order()
         {
             this.Combos = new List<Combo>();
