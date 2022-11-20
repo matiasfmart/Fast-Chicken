@@ -8,6 +8,20 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
+    <PackageReference Include="MySql.Data" Version="8.0.31" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\js\Home\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\js\Home\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="DBConnection\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="MySql.Data" />
+    <None Remove="Interfaces\" />
+    <None Remove="DBConnection\" />
+  </ItemGroup>
 </Project>

@@ -16,3 +16,96 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.App {
+    text-align: center;
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.btn-menu {
+    width: 100%;
+    height: 100%;
+    border-color: #00000026;
+    /* border-radius: 10px;
+  border-width: 1px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 1px 0px 9px 2px rgba(147.0172119140625,147.0172119140625,147.0172119140625,0.5); */
+}
+
+.btn-addRemove {
+    border-radius: 10px;
+}
+
+#rowOrder {
+    display: flex;
+    justify-content: space-between;
+    height: 100vh;
+    flex-direction: column;
+}
+
+    #rowOrder button {
+    }
+
+#combos_list {
+    height: 87vh;
+    overflow-y: scroll;
+}
+
+#noHayItems {
+    height: 67vh;
+}
+
+#orderDetails {
+    height: 54vh;
+    overflow-y: scroll;
+}
+
+.item_modal_ice {
+    padding: 10px 50px !important;
+    font-size: 20px !important;
+}
+
+.item_modal_drink {
+    padding: 10px 30px !important;
+    font-size: 20px !important;
+}
+
+.item_modal_side {
+    padding: 10px 33px !important;
+    font-size: 20px !important;
+}

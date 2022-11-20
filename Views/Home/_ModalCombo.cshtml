@@ -1,0 +1,69 @@
+﻿@model FastChicken.Models.Combo
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title lead" id="staticBackdropLabel">@Model.Name</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <h4 class="mb-3 fw-bold">Bebidas</h4>
+                <div class="container">
+                    <div class="row mb-4">
+                        <div class="col-md-3 text-center">
+                            <input type="radio" class="btn-check" name="drink" id="coca" autocomplete="off">
+                            <label class="item_modal_drink fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="coca">Coca</label>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <input type="radio" class="btn-check" name="drink" id="sprite" autocomplete="off">
+                            <label class="item_modal_drink fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="sprite">Sprite</label>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <input type="radio" class="btn-check" name="drink" id="fanta" autocomplete="off">
+                            <label class="item_modal_drink fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="fanta">Fanta</label>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <input type="radio" class="btn-check" name="drink" id="jugo" autocomplete="off">
+                            <label class="item_modal_drink fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="jugo">Jugo</label>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col text-center">
+                            <input type="radio" class="btn-check" name="ice" id="con" autocomplete="off">
+                            <label class="item_modal_ice fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="con">Con Hielo</label>
+                        </div>
+                        <div class="col text-center">
+                            <input type="radio" class="btn-check" name="ice" id="sin" autocomplete="off">
+                            <label class="item_modal_ice fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="sin">Sin Hielo</label>
+                        </div>
+                    </div>
+                </div>
+            <hr>
+            @if (Model.Type == "PO")
+            {
+                <h4 class="mb-3 fw-bold">Guarnicion</h4>
+                <div class="container">
+                    <div class="row mb-4">
+                        <div class="col text-center">
+                            <input type="radio" class="btn-check" name="side" id="arroz" autocomplete="off">
+                            <label class="item_modal_side fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="arroz">Arroz</label>
+                        </div>
+                        <div class="col text-center">
+                            <input type="radio" class="btn-check" name="side" id="ensalada" autocomplete="off">
+                            <label class="item_modal_side fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="ensalada">Ensalada</label>
+                        </div>
+                        <div class="col text-center">
+                            <input type="radio" class="btn-check" name="side" id="papas" autocomplete="off">
+                            <label class="item_modal_side fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="papas">Papas</label>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" onclick="AddOrderItem('@Model.Name', '@Model.Price', '@Model.Type')">Agregar</button>
+        </div>
+    </div>
+</div>
+
