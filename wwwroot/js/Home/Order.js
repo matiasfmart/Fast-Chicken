@@ -1,4 +1,25 @@
-﻿function LoadCombosList() {
+﻿function FinishOrder() {
+    orderItems = [];
+    orderItemId = 0;
+    $('#orderView').load('/Home/FinishOrder', { items: orderItems }, function (response, status, xhr) {
+        if (status == 'success') {
+        }
+    })
+}
+
+function NewOrderBtn() {
+    $('#orderView').load('/Home/Order', { items: orderItems }, function (response, status, xhr) {
+        if (status == 'success') {
+            LoadCombosList();
+        }
+    })
+    //$.post('/Home/Order')
+    //.done(function (data) {
+
+    //})
+}
+
+function LoadCombosList() {
     $('#combos_list').load('/Home/GetCombos', function () {
         if (status == 'success') {
         }
@@ -13,15 +34,28 @@ document.addEventListener('DOMContentLoaded', function (event) {
     LoadCombosList();
 })
 
-function LoadComboModal(name, type, price){
-    $('#dialog').load('/Home/LoadComboModal', { name: name, type: type, price: price }, function (response, status, xhr) {
+function LoadComboModal(id, name, type, price) {
+    var combo = GetCombo(id, name, type, price);
+    $('#dialog').load('/Home/LoadComboModal', { combo: combo }, function (response, status, xhr) {
         if (status == 'success') {
             $('#dialog').modal('show');
         }
     })
 }
 
-function GetOrderItem(name, price, type) {
+function GetCombo(id, name, type, price) {
+    var obj = {
+        ComboId: id,
+        Name: name,
+        Price: price,
+        Type: type
+    }
+    return obj
+}
+
+var orderItemId = 0;
+function GetOrderItem(id, name, price, type) {
+    orderItemId++;
     let drink;
     let ice;
     let side;
@@ -45,7 +79,9 @@ function GetOrderItem(name, price, type) {
 
     ice = $('input[type="radio"][name="ice"][id=con]').prop('checked');
 
-    var obj = {
+    var obj = {     
+        ComboId: id,
+        OrderItemId : orderItemId,
         Name: name,
         Price: price,
         Side: side,
@@ -61,13 +97,33 @@ function GetOrderItem(name, price, type) {
     return obj;
 }
 
-var orderItems = [];
-function AddOrderItem(name, price, type) {
-    orderItems.push(GetOrderItem(name, price, type));
-    debugger
-    $('#order_items').load('/Home/AddOrderItem', { items: orderItems }, function (response, status, xhr) {
+function AddOrderItems(items) {
+    $('#order_items').load('/Home/AddOrderItems', { items: items }, function (response, status, xhr) {
         if (status == 'success') {
             $('#dialog').modal('hide');
         }
     })
 }
+
+var orderItems = [];
+function AddItem(id, name, price, type) {
+    orderItems.push(GetOrderItem(id, name, price, type));
+    AddOrderItems(orderItems);
+}
+
+function DeleteItem(id) {
+    debugger
+    orderItems = orderItems.filter(element => element.OrderItemId != id)
+    AddOrderItems(orderItems);
+}
+
+function ClearItems() {
+    orderItems = [];
+    orderItemId = 0;
+    AddOrderItems(orderItems);
+}
+
+//function ModalUpdateItem(id) {
+//    const indexItem = orderItems.findIndex((e) => e.OrderItemId == id);
+//    orderItems[indexItem].count = orderItems[indexItem].count + 1;
+//}

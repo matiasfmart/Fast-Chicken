@@ -5,7 +5,7 @@
     @{foreach (var item in Model)
         if (item.Type == "PO") {
         <div class="col-md-4 mb-3">
-           <button class='btn-menu py-3 px-2 btn btn-outline-primary shadow-sm rounded' type="button" onclick="LoadComboModal('@item.Name', '@item.Type', '@item.Price');">
+           <button class='btn-menu py-3 px-2 btn btn-outline-primary shadow-sm rounded' type="button" onclick="LoadComboModal('@item.ComboId', '@item.Name', '@item.Type', '@item.Price');">
                 <div class="container">
                     <h5 class='title-menu fw-semibold'>@item.Name</h5>
                     <div class="row">
@@ -26,7 +26,7 @@
         if (item.Type == "BG")
         {
         <div class="col-md-4 mb-3">
-            <button class='btn-menu py-3 px-2 btn btn-outline-primary shadow-sm rounded' type="button" onclick="LoadComboModal('@item.Name', '@item.Type', '@item.Price');">
+            <button class='btn-menu py-3 px-2 btn btn-outline-primary shadow-sm rounded' type="button" onclick="LoadComboModal('@item.ComboId', '@item.Name', '@item.Type', '@item.Price');">
                 <div class="container">
                     <h5 class='title-menu fw-semibold'>@item.Name</h5>
                     <div class="row">

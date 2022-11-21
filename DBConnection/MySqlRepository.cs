@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 using FastChicken.Models;
 using FastChicken.Interfaces;
+using static NuGet.Packaging.PackagingConstants;
 
 namespace FastChicken.DBConnection
 {
@@ -17,9 +18,31 @@ namespace FastChicken.DBConnection
 				.Build();
 			_connectionString = config.GetSection("ConnectionStrings:DefaultConnection").Value;
 		}
-		private void Create()
-		{
 
+		public void AddOrder(Order newOrder)
+		{
+			MySqlTransaction mySqlTransaction = null;
+			using(MySqlConnection connection = new MySqlConnection(_connectionString))
+            {
+                try
+                {
+                    connection.Open();
+					string SQL = "INSERT INTO `FastChicken`.`Orders` (`idOrders`, `Total`, `Date`) VALUES(@Id, @Total, @Date);";
+					MySqlCommand mySqlCommand = new MySqlCommand(SQL, connection);
+
+					mySqlCommand.Parameters.AddWithValue("@Id", newOrder.Id);
+					mySqlCommand.Parameters.AddWithValue("@Total", newOrder.Total);
+					mySqlCommand.Parameters.AddWithValue("@Date", newOrder.Date);
+
+					mySqlTransaction.Commit();
+
+					mySqlCommand.Dispose();
+                }
+                catch (MySqlException ex)
+				{
+
+				}
+			}
 		}
         public List<Combo> GetCombos()
         {

@@ -17,6 +17,9 @@ namespace FastChicken.Controllers
             _mySqlRepository = mySqlRepository;
         }
 
+        public int orderId = 0;
+        public int totalOrder = 0;
+
         public IActionResult Index()
         {
             return View();
@@ -46,27 +49,24 @@ namespace FastChicken.Controllers
             return PartialView("_CombosList",combos);
         }
 
-        public IActionResult LoadComboModal(string name, string type, string price)
+        public IActionResult LoadComboModal(Combo combo)
         {
-            Combo combo = new Combo();
-            combo.Name = name;
-            combo.Type = type;
-            combo.Price = price;
-
             return PartialView("_ModalCombo", combo);
         }
 
-        public IActionResult AddOrderItem(List<OrderItem> items) {
+        public IActionResult AddOrderItems(List<OrderItem> items) {
+
+            var total = 0;
+            foreach (var item in items)
+            {
+                total = total + int.Parse(item.Price);
+            }
+
+            ViewBag.Total = total;
+            totalOrder = total;
+
             return PartialView("_OrderItems", items);
         }
-
-        //[HttpGet]
-        //public IActionResult GetComboDetail()
-        //{
-        //    List<Combo> combos = _mySqlRepository.GetCombos();
-
-        //    return PartialView("_CombosList", combos);
-        //}
 
         public IActionResult GetOrderDetail()
         {
@@ -77,14 +77,27 @@ namespace FastChicken.Controllers
             return PartialView("_OrderDetail", order);
         }
 
-        public bool TerminarPedido()
+        public IActionResult FinishOrder(List<OrderItem> items)
         {
-            bool success = false;
+            Order newOrder = new Order();
 
-            //terminar pedido
+            newOrder.Id = orderId;
+            newOrder.Total = totalOrder;
+            newOrder.Date = DateTime.Now;
 
-            return success;
+            _mySqlRepository.AddOrder(newOrder);
+
+            //setear combos pedidos a tabla en sql...
+            totalOrder = 0;
+            orderId++;
+            return PartialView("_FinishOrder");
         }
 
+        public void FinishDay()
+        {
+            orderId = 0;
+            ViewBag.Total = 0;
+            RedirectToAction("Index", "Home");
+        }
     }
 }

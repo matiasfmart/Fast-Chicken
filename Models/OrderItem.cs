@@ -3,7 +3,9 @@ namespace FastChicken.Models
 {
 	public class OrderItem
 	{
-		public string Name { get; set; }
+        public string ComboId { get; set; }
+        public string OrderItemId { get; set; }
+        public string Name { get; set; }
 		public string Price { get; set; }
         public string Side { get; set; }
 		public string Drink { get; set; }
@@ -11,4 +13,3 @@ namespace FastChicken.Models
 		public string Type { get; set; }
     }
 }
-

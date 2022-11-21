@@ -2,7 +2,7 @@
     Layout = "_Layout";
 }
 
-<div class="container-xl">
+<div id="orderView" class="container-xl">
     <div class="row">
         <div class="col-8 p-2 border-end" id="newOrderMenuList">
             <div class='m-3'>
@@ -14,21 +14,23 @@
         <div class="col-4">
             <div class='row' id='rowOrder'>
                 <div class="mt-3">
-                    <div class="col-12 p-4 shadow rounded bg-white" id="order_items">
+                    <div class="col-12 p-4 shadow rounded bg-white">
                         <div class="row mb-3">
                             <h2 class="fw-bold">Pedido</h2>
                         </div>
                         <div id="order_items">
-                        </div>
-                        <div class="row mb-3" id="noHayItems">
-                            <p class="lead text-muted text-center">No hay items</p>
+                            <div class="row mb-3" id="noHayItems">
+                                <p class="lead text-muted text-center">No hay items</p>
+                            </div>
                         </div>
                         <div class='container'>
-                            <button type="button" id="btnFinishOrder" class="col-12 p-3 btn btn-primary btn-lg fw-semibold mb-4">
-                                Terminar Pedido
-                            </button>
                         </div>
                     </div>
+                </div>
+                <div class="container">
+                    <button type="button" id="btnFinishOrder" class="col-12 p-3 btn btn-primary btn-lg fw-semibold mb-4" onclick="FinishOrder()">
+                        Terminar Pedido
+                    </button>
                 </div>
             </div>
         </div>
@@ -41,3 +43,9 @@
 <environment include="Development">
     <script src="~/js/Home/Order.js"></script>
 </environment>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function (event) {
+        LoadCombosList();
+    })
+</script>
