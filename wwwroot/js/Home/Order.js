@@ -1,8 +1,17 @@
-﻿function FinishOrder() {
-    orderItems = [];
-    orderItemId = 0;
-    $('#orderView').load('/Home/FinishOrder', { items: orderItems }, function (response, status, xhr) {
+﻿var orderNum = 0;
+var total;
+
+function FinishDay() {
+    orderId = 0;
+}
+
+function FinishOrder() {
+    debugger
+    $('#orderView').load('/Home/FinishOrder', { items: orderItems, total: total, orderNum: orderNum }, function (response, status, xhr) {
         if (status == 'success') {
+            orderItems = [];
+            orderItemId = 0;
+            orderNum++;
         }
     })
 }

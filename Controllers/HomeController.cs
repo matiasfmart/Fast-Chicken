@@ -17,9 +17,6 @@ namespace FastChicken.Controllers
             _mySqlRepository = mySqlRepository;
         }
 
-        public int orderId = 0;
-        public int totalOrder = 0;
-
         public IActionResult Index()
         {
             return View();
@@ -63,7 +60,6 @@ namespace FastChicken.Controllers
             }
 
             ViewBag.Total = total;
-            totalOrder = total;
 
             return PartialView("_OrderItems", items);
         }
@@ -77,26 +73,24 @@ namespace FastChicken.Controllers
             return PartialView("_OrderDetail", order);
         }
 
-        public IActionResult FinishOrder(List<OrderItem> items)
+        public IActionResult FinishOrder(List<OrderItem> items, int total, int orderNum)
         {
             Order newOrder = new Order();
 
-            newOrder.Id = orderId;
-            newOrder.Total = totalOrder;
+            newOrder.Total = total;
             newOrder.Date = DateTime.Now;
+            newOrder.OrderNum = orderNum;
 
             _mySqlRepository.AddOrder(newOrder);
 
             //setear combos pedidos a tabla en sql...
-            totalOrder = 0;
-            orderId++;
             return PartialView("_FinishOrder");
         }
 
         public void FinishDay()
         {
-            orderId = 0;
-            ViewBag.Total = 0;
+            //orderId = 0;
+            //ViewBag.Total = 0;
             RedirectToAction("Index", "Home");
         }
     }

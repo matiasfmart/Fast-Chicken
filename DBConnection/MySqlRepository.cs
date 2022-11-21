@@ -21,26 +21,24 @@ namespace FastChicken.DBConnection
 
 		public void AddOrder(Order newOrder)
 		{
-			MySqlTransaction mySqlTransaction = null;
 			using(MySqlConnection connection = new MySqlConnection(_connectionString))
             {
                 try
                 {
                     connection.Open();
-					string SQL = "INSERT INTO `FastChicken`.`Orders` (`idOrders`, `Total`, `Date`) VALUES(@Id, @Total, @Date);";
+					string SQL = "INSERT INTO `FastChicken`.`Orders` (`Total`, `Date`, `OrderNum`) VALUES(@Total, @Date, @OrderNum);";
 					MySqlCommand mySqlCommand = new MySqlCommand(SQL, connection);
 
-					mySqlCommand.Parameters.AddWithValue("@Id", newOrder.Id);
 					mySqlCommand.Parameters.AddWithValue("@Total", newOrder.Total);
 					mySqlCommand.Parameters.AddWithValue("@Date", newOrder.Date);
-
-					mySqlTransaction.Commit();
+					mySqlCommand.Parameters.AddWithValue("@OrderNum", newOrder.OrderNum);
+					mySqlCommand.ExecuteNonQuery();
 
 					mySqlCommand.Dispose();
                 }
                 catch (MySqlException ex)
 				{
-
+					System.Diagnostics.Debug.WriteLine(ex.Message);
 				}
 			}
 		}
