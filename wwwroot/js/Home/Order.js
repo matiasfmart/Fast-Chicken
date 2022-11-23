@@ -1,4 +1,4 @@
-﻿var orderNum;
+﻿var orderNum = 0;
 var total;
 
 function FinishDay() {
