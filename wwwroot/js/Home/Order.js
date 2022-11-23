@@ -1,17 +1,26 @@
-﻿var orderNum = 0;
+﻿var orderNum;
 var total;
 
 function FinishDay() {
-    orderId = 0;
+    orderNum = 0;
 }
 
 function FinishOrder() {
-    debugger
     $('#orderView').load('/Home/FinishOrder', { items: orderItems, total: total, orderNum: orderNum }, function (response, status, xhr) {
+        debugger
         if (status == 'success') {
+            $('#dialog').modal('hide');
             orderItems = [];
             orderItemId = 0;
             orderNum++;
+        }
+    })
+}
+
+function ConfirmFinishOrder() {
+    $('#dialog').load('/Home/ConfirmFinishOrder', function (response, status, xhr) {
+        if (status == 'success') {
+            $('#dialog').modal('show');
         }
     })
 }

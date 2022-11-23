@@ -73,6 +73,11 @@ namespace FastChicken.Controllers
             return PartialView("_OrderDetail", order);
         }
 
+        public IActionResult ConfirmFinishOrder()
+        {
+            return PartialView("_ModalConfirmFinishOrder");
+        }
+
         public IActionResult FinishOrder(List<OrderItem> items, int total, int orderNum)
         {
             Order newOrder = new Order();
