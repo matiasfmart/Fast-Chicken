@@ -6,6 +6,7 @@ function FinishDay() {
 }
 
 function FinishOrder() {
+    debugger
     $('#orderView').load('/Home/FinishOrder', { items: orderItems, total: total, orderNum: orderNum }, function (response, status, xhr) {
         debugger
         if (status == 'success') {
@@ -23,18 +24,6 @@ function ConfirmFinishOrder() {
             $('#dialog').modal('show');
         }
     })
-}
-
-function NewOrderBtn() {
-    $('#orderView').load('/Home/Order', { items: orderItems }, function (response, status, xhr) {
-        if (status == 'success') {
-            LoadCombosList();
-        }
-    })
-    //$.post('/Home/Order')
-    //.done(function (data) {
-
-    //})
 }
 
 function LoadCombosList() {
@@ -83,19 +72,37 @@ function GetOrderItem(id, name, price, type) {
         drink = "Coca";
     } else if ($('input[type="radio"][name="drink"][id=fanta]').prop('checked')) {
         drink = "Fanta";
-    } else {
+    } else if ($('input[type="radio"][name="drink"][id=jugo]').prop('checked')) {
         drink = "Jugo";
+    } else {
+        return false;
     }
 
     if ($('input[type="radio"][name="side"][id=arroz]').prop('checked')) {
         side = "Arroz";
-    } else if ($('input[type="radio"][name="drink"][id=ensalada]').prop('checked')) {
+    } else if ($('input[type="radio"][name="side"][id=ensalada]').prop('checked')) {
         side = "Ensalada";
     } else {
         side = "Papas";
     }
 
-    ice = $('input[type="radio"][name="ice"][id=con]').prop('checked');
+    //if ($('input[type="radio"][name="side"][id=arroz]').prop('checked')) {
+    //    side = "Arroz";
+    //} else if ($('input[type="radio"][name="side"][id=ensalada]').prop('checked')) {
+    //    side = "Ensalada";
+    //} else if ($('input[type="radio"][name="side"][id=papas]').prop('checked')) {
+    //    side = "Papas";
+    //} else {
+    //    return false;
+    //}
+
+    if ($('input[type="radio"][name="ice"][id=con]').prop('checked')) {
+        ice = true;
+    } else if ($('input[type="radio"][name="ice"][id=sin]').prop('checked')) {
+        ice = false
+    } else {
+        return false;
+    }
 
     var obj = {     
         ComboId: id,
@@ -125,7 +132,8 @@ function AddOrderItems(items) {
 
 var orderItems = [];
 function AddItem(id, name, price, type) {
-    orderItems.push(GetOrderItem(id, name, price, type));
+    var item = GetOrderItem(id, name, price, type);
+    orderItems.push(item);
     AddOrderItems(orderItems);
 }
 

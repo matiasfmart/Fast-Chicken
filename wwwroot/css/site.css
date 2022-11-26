@@ -14,7 +14,6 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
 }
 
 .App {
@@ -72,14 +71,19 @@ body {
 }
 
 #rowOrder {
-    display: flex;
-    justify-content: space-between;
     height: 100vh;
     flex-direction: column;
 }
 
-    #rowOrder button {
-    }
+#containerOrderItems {
+    height: 70vh;
+}
+#containerFinishOrderBtn {
+    height: 25vh;
+    display: flex;
+    align-items: end;
+}
+
 
 #combos_list {
     height: 87vh;
@@ -91,7 +95,7 @@ body {
 }
 
 #orderDetails {
-    height: 54vh;
+    height: 50vh;
     overflow-y: scroll;
 }
 

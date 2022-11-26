@@ -23,5 +23,6 @@
     <None Remove="MySql.Data" />
     <None Remove="Interfaces\" />
     <None Remove="DBConnection\" />
+    <None Remove="toastr" />
   </ItemGroup>
 </Project>
