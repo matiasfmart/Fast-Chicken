@@ -1,42 +1,51 @@
 ﻿@model List<FastChicken.Models.Combo>
 
 <div class="row mb-3 mx-2 p-3 shadow rounded bg-white">
-    <h4 class='mb-3 fw-bold'>Combos Pollos</h4>
+    <div class='d-flex align-items-start mb-2'>
+        <img class='d-inline' src="~/img/pollo-frito.png" alt="Bootstrap" width="35" />
+        <h4 class='mb-3 mx-2 fw-bold d-inline'>Pollos</h4>
+    </div>
+
     @{foreach (var item in Model)
-        if (item.Type == "PO") {
-        <div class="col-md-4 mb-3">
-           <button class='btn-menu py-3 px-2 btn btn-outline-primary shadow-sm rounded' type="button" onclick="LoadComboModal('@item.ComboId', '@item.Name', '@item.Type', '@item.Price');">
-                <div class="container">
-                    <h5 class='title-menu fw-semibold'>@item.Name</h5>
-                    <div class="row">
-                        <div class="col-12">
-                            <h6 class='text-muted'><small>@item.Description</small></h6>
+            if (item.Type == "PO")
+            {
+                <div class="col-md-4 mb-3">
+                    <button class='btn-menu py-3 px-2 btn btn-outline-primary shadow-sm rounded' type="button" onclick="LoadComboModal('@item.ComboId', '@item.Name', '@item.Type', '@item.Price');">
+                        <div class="container">
+                            <h5 class='title-menu fw-semibold'>@item.Name</h5>
+                            <div class="row">
+                                <div class="col-12">
+                                    <h6 class='text-muted'><small>@item.Description</small></h6>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </button>
                 </div>
-            </button>
-        </div>
-        }
+            }
     }
 </div>
 <div class="row mb-3 mx-2 p-3 shadow rounded bg-white">
-    <h4 class='mb-3 fw-bold'>Combos Hamburguesas</h4>
+    <div class='d-flex align-items-start mb-2'>
+        <img class='d-inline' src="~/img/hamburguesa.png" alt="Bootstrap" width="35" />
+        <h4 class='mb-3 mx-2 fw-bold d-inline'>Hamburguesas</h4>
+    </div>
+
     @foreach (var item in Model)
     {
         if (item.Type == "BG")
         {
-        <div class="col-md-4 mb-3">
-            <button class='btn-menu py-3 px-2 btn btn-outline-primary shadow-sm rounded' type="button" onclick="LoadComboModal('@item.ComboId', '@item.Name', '@item.Type', '@item.Price');">
-                <div class="container">
-                    <h5 class='title-menu fw-semibold'>@item.Name</h5>
-                    <div class="row">
-                        <div class="col-12">
-                            <h6 class='text-muted'><small>@item.Description</small></h6>
+            <div class="col-md-4 mb-3">
+                <button class='btn-menu py-3 px-2 btn btn-outline-primary shadow-sm rounded' type="button" onclick="LoadComboModal('@item.ComboId', '@item.Name', '@item.Type', '@item.Price');">
+                    <div class="container">
+                        <h5 class='title-menu fw-semibold'>@item.Name</h5>
+                        <div class="row">
+                            <div class="col-12">
+                                <h6 class='text-muted'><small>@item.Description</small></h6>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </button>
-        </div>
+                </button>
+            </div>
         }
     }
 </div>

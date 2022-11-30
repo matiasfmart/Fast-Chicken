@@ -5,14 +5,15 @@
 <div id="orderView" class="container-xl">
     <div class="row">
         <div class="col-8 p-2 border-end" id="newOrderMenuList">
-            <div class='m-3'>
-                <h1 class='fw-bold'>Fast Chicken</h1>
+            <div class='m-3 d-flex align-items-center'>
+                <h1 class='fw-bold d-inline'>Fast Chicken</h1>
+                <img class='d-inline mx-2' src="~/img/chickenIcon.png" alt="Bootstrap" width="40"/>
             </div>
             <div class='container' id="combos_list">
             </div>
         </div>
         <div class="col-4">
-            <div class='row' id='rowOrder'>
+            <div class='row d-flex align-items-' id='rowOrder'>
                 <div class="mt-3" id="containerOrderItems">
                     <div class="col-12 p-4 shadow rounded bg-white">
                         <div class="row mb-3">
@@ -23,12 +24,10 @@
                                 <p class="lead text-muted text-center">No hay items</p>
                             </div>
                         </div>
-                        <div class='container'>
-                        </div>
                     </div>
                 </div>
-                <div class="container" id="containerFinishOrderBtn">
-                    <button type="button" id="btnFinishOrder" class="col-12 p-3 btn btn-primary btn-lg fw-semibold" onclick="ConfirmFinishOrder();">
+                <div class="container mt-5" id="containerFinishOrderBtn">
+                    <button type="button" id="btnFinishOrder" class="col-12 p-3 btn btn-primary btn-lg fw-semibold" onclick="ConfirmFinishOrder();" disabled>
                         Terminar Pedido
                     </button>
                 </div>

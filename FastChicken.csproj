@@ -13,11 +13,13 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\js\Home\" />
+    <Content Remove="wwwroot\img\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\js\Home\" />
     <Folder Include="Interfaces\" />
     <Folder Include="DBConnection\" />
+    <Folder Include="wwwroot\img\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="MySql.Data" />

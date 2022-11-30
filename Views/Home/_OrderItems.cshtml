@@ -1,20 +1,21 @@
 ﻿@model List<FastChicken.Models.OrderItem>
 
-<div class="row mb-2" id="orderDetails">
-    <ul class="list-group list-group-flush">
-        @{if (Model.Count != 0)
-            {
-                foreach (var item in Model)
+@if (Model.Count != 0)
+{
+    <div class="row mb-2" id="orderDetails">
+        <ul class="list-group list-group-flush">
+            @foreach (var item in Model)
                 {
-                    <li class="list-group-item px-0 my-1">
+                <li class="list-group-item px-0 my-1">
+                    <div class="container-fluid">
                         <div class="row d-flex flex-row justify-content-between align-items-center">
-                            <div class="col-5 d-flex">
-                                <div class="container-fluid">
+                            <div class="col-6">
+                                <div>
                                     <div class="row">
                                         <label class="text-primary"><b>@item.Name</b></label>
                                     </div>
                                     <div class="row">
-                                        <label><b>@item.Price</b></label>
+                                        <label><b>$@item.Price</b></label>
                                     </div>
                                 </div>
                             </div>
@@ -26,41 +27,40 @@
                                     <label>@item.Drink</label>
                                 </div>
                             </div>
-                            <div class="col-3 d-flex justify-content-end">
+                            <div class="col-2 d-flex justify-content-end">
                                 @*<button class='btn btn-success mx-1' onclick="ModalUpdateItem('@item.OrderItemId')">
-                                    <i class="bi bi-pencil-square"></i>
-                                </button>*@
+                                        <i class="bi bi-pencil-square"></i>
+                                    </button>*@
                                 <button class='btn btn-danger mx-1' onclick="DeleteItem('@item.OrderItemId')">
                                     <i class="bi bi-x-lg"></i>
                                 </button>
                             </div>
                         </div>
-                    </li>
+                    </div>
+                </li>
                 }
-            }
-            else
-            {
-                <div class="row mb-3" id="noHayItems">
-                    <p class="lead text-muted text-center">No hay items</p>
-                </div>
-            }
-        }
-
-    </ul>
-</div>
-<div class="row mb-3 border rounded shadow-sm">
-    <div class="d-flex justify-content-between align-items-center">
-        <div class="p-2">
-            <h4 class="fw-bold text-uppercase text-success">Total</h4>
-        </div>
-        <div class="p-2">
-            <h4 class="fw-bold text-uppercase text-success">@ViewBag.Total</h4>
+        </ul>
+    </div>
+    <div class="row mb-3 border rounded shadow-sm">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="p-2">
+                <h4 class="fw-bold text-uppercase text-success">Total</h4>
+            </div>
+            <div class="p-2">
+                <h4 class="fw-bold text-uppercase text-success">$@ViewBag.Total</h4>
+            </div>
         </div>
     </div>
-</div>
-<div class="row justify-content-end mb-1">
-    <button class='btn btn-danger col-5 p-2 lead fw-bold' onclick="ClearItems()">Eliminar Todo<i class="mx-1 bi bi-trash3"></i></button>
-</div>
+    <div class="row justify-content-end mb-1">
+        <button class='btn btn-danger col-5 p-2 lead fw-bold' onclick="ClearItems();">Eliminar Todo<i class="mx-1 bi bi-trash3"></i></button>
+    </div>
+}
+else
+{
+    <div class="row mb-3" id="noHayItems">
+        <p class="lead text-muted text-center">No hay items</p>
+    </div>
+}
 
 <script>
         total = @ViewBag.Total;

@@ -79,7 +79,7 @@ body {
     height: 70vh;
 }
 #containerFinishOrderBtn {
-    height: 25vh;
+    height: 15vh;
     display: flex;
     align-items: end;
 }
@@ -91,10 +91,10 @@ body {
 }
 
 #noHayItems {
-    height: 67vh;
+    height: 64vh;
 }
 
-#orderDetails {
+#orderDetails{
     height: 50vh;
     overflow-y: scroll;
 }
@@ -116,4 +116,23 @@ body {
 
 #alertFinish {
     height: 100vh;
+}
+
+.error-msg {
+    color: #D8000C;
+    background-color: #FFBABA;
+    margin: 10px 0;
+    padding: 20px;
+    border-radius: 3px 3px 3px 3px;
+}
+
+#msg-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+#msg {
+    width: 95%;
 }

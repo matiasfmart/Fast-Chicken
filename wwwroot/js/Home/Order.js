@@ -1,6 +1,10 @@
 ﻿var orderNum = 0;
 var total;
 
+function Danger(msg) {
+    $("#msg-container").html("<div id='msg'><div class='error-msg'><i class='bi bi-x-circle'></i> " + msg + "</div></div>");
+}
+
 function FinishDay() {
     orderNum = 0;
 }
@@ -19,11 +23,16 @@ function FinishOrder() {
 }
 
 function ConfirmFinishOrder() {
-    $('#dialog').load('/Home/ConfirmFinishOrder', function (response, status, xhr) {
-        if (status == 'success') {
-            $('#dialog').modal('show');
-        }
-    })
+    debugger
+    if (orderItems.length != 0) {
+        $('#dialog').load('/Home/ConfirmFinishOrder', function (response, status, xhr) {
+            if (status == 'success') {
+                $('#dialog').modal('show');
+            }
+        })
+    } else {
+        Danger("No hay combos agregados.")
+    }
 }
 
 function LoadCombosList() {
@@ -78,23 +87,17 @@ function GetOrderItem(id, name, price, type) {
         return false;
     }
 
-    if ($('input[type="radio"][name="side"][id=arroz]').prop('checked')) {
-        side = "Arroz";
-    } else if ($('input[type="radio"][name="side"][id=ensalada]').prop('checked')) {
-        side = "Ensalada";
-    } else {
-        side = "Papas";
+    if (type == "PO") {
+        if ($('input[type="radio"][name="side"][id=arroz]').prop('checked')) {
+            side = "Arroz";
+        } else if ($('input[type="radio"][name="side"][id=ensalada]').prop('checked')) {
+            side = "Ensalada";
+        } else if ($('input[type="radio"][name="side"][id=papas]').prop('checked')) {
+            side = "Papas";
+        } else {
+            return false;
+        }
     }
-
-    //if ($('input[type="radio"][name="side"][id=arroz]').prop('checked')) {
-    //    side = "Arroz";
-    //} else if ($('input[type="radio"][name="side"][id=ensalada]').prop('checked')) {
-    //    side = "Ensalada";
-    //} else if ($('input[type="radio"][name="side"][id=papas]').prop('checked')) {
-    //    side = "Papas";
-    //} else {
-    //    return false;
-    //}
 
     if ($('input[type="radio"][name="ice"][id=con]').prop('checked')) {
         ice = true;
@@ -123,6 +126,7 @@ function GetOrderItem(id, name, price, type) {
 }
 
 function AddOrderItems(items) {
+    items.length == 0 ? $('#btnFinishOrder').prop('disabled', true) : $('#btnFinishOrder').prop('disabled', false);
     $('#order_items').load('/Home/AddOrderItems', { items: items }, function (response, status, xhr) {
         if (status == 'success') {
             $('#dialog').modal('hide');
@@ -133,8 +137,12 @@ function AddOrderItems(items) {
 var orderItems = [];
 function AddItem(id, name, price, type) {
     var item = GetOrderItem(id, name, price, type);
-    orderItems.push(item);
-    AddOrderItems(orderItems);
+    if (item) {
+        orderItems.push(item);
+        AddOrderItems(orderItems);
+    } else {
+        Danger("El menu esta incompleto.")
+    }
 }
 
 function DeleteItem(id) {
