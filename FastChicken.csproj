@@ -27,4 +27,5 @@
     <None Remove="DBConnection\" />
     <None Remove="toastr" />
   </ItemGroup>
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 </Project>

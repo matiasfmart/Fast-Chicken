@@ -136,3 +136,90 @@ body {
 #msg {
     width: 95%;
 }
+
+@media screen {
+    .print {
+        display: none !important;
+    }
+}
+
+@media print {
+    .screen {
+        display: none !important;
+    }
+
+    .print {
+        color: black;
+    }
+
+    @page {
+        width: 78mm;
+        margin-top: 0;
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 10;
+        size: auto;
+    }
+
+    .tableTicket {
+        padding: 7px;
+    }
+
+    .ticketLogo {
+        font-weight: bold;
+        font-size: 45px;
+        font-style: italic;
+        text-align: center;
+        height: 120px;
+    }
+
+    .orderNum {
+        font-weight: bold;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .ticketTitle {
+        font-weight: bold;
+        font-size: 26px;
+        text-decoration: underline;
+        text-align: center;
+        height: 90px;
+    }
+
+    .ticketSubTitle {
+        font-weight: bold;
+        font-size: 16px;
+        font-style: italic;
+        text-align: center;
+    }
+
+    .ticketTotal {
+        font-weight: bold;
+        font-size: 24px;
+        text-align: center;
+        height: 90px;
+    }
+
+    .ticketCantidad {
+        font-size: 16px;
+        text-align: center;
+        width: 130px;
+        max-width: 130px;
+    }
+
+    .ticketConcepto1 {
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .ticketConcepto2 {
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .ticketConcepto3 {
+        font-size: 16px;
+        text-align: left;
+    }
+}

@@ -14,10 +14,25 @@ function FinishOrder() {
     $('#orderView').load('/Home/FinishOrder', { items: orderItems, total: total, orderNum: orderNum }, function (response, status, xhr) {
         debugger
         if (status == 'success') {
+
+            console.log(orderItems);
+            console.log(orderNum);
+            console.log(total);
+
             $('#dialog').modal('hide');
             orderItems = [];
             orderItemId = 0;
             orderNum++;
+
+            // cliente
+            $('#cocina').hide();
+            $('#cliente').show();
+            window.print();
+
+            // Cocina
+            $('#cliente').hide();
+            $('#cocina').show();
+            window.print();
         }
     })
 }

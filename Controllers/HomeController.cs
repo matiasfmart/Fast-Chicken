@@ -85,11 +85,12 @@ namespace FastChicken.Controllers
             newOrder.Total = total;
             newOrder.Date = DateTime.Now;
             newOrder.OrderNum = orderNum;
+            newOrder.Items = items;
 
             _mySqlRepository.AddOrder(newOrder);
 
             //setear combos pedidos a tabla en sql...
-            return PartialView("_FinishOrder");
+            return PartialView("_FinishOrder", newOrder);
         }
 
         public void FinishDay()

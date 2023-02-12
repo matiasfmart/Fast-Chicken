@@ -1,4 +1,71 @@
-﻿<div id="alertFinish" class="container text-center d-flex justify-content-center">
+﻿@model FastChicken.Models.Order
+<div class="print">
+    <table width="100%">
+        <tr><td align="center">
+            <div id="cliente">
+                <table class="tableTicket">
+                     <tr>
+                        <td colspan="2" class="ticketLogo">Fast Chicken</td>
+                    </tr>
+                     <tr>
+                         <td colspan="2" class="orderNum">Orden Nro: @Model.OrderNum.ToString("D8")</td>
+                     </tr>
+                     <tr>
+                         <td colspan="2" class="ticketTitle">PEDIDO</td>
+                     </tr>
+                     <tr>
+                         <td class="ticketSubTitle">CANTIDAD</td>
+                         <td class="ticketSubTitle">DETALLE</td>
+                     </tr>
+                    @foreach( var item in Model.Items)
+                     {
+                         <tr>
+                            <td class="ticketCantidad">1</td>
+                            <td class="ticketConcepto1">Principal: @item.Name</td>
+                        </tr>
+                        <tr><td>&nbsp;</td><td class="ticketConcepto2">Gaseosa: @item.Drink @(item.Ice ? " con hielo" : " sin hielo")</td></tr>
+                        @if( item.Type == "PO") {
+                            <tr><td>&nbsp;</td><td class="ticketConcepto3"> Guarnición: @item.Side</td></tr>
+                        }
+                    }
+                    <tr>
+                        <td colspan="2" class="ticketTotal">Total: @string.Format("{0:C}", Model.Total)</td>
+                    </tr>
+                </table>
+            </div>
+            <div id="cocina">
+                <table class="tableTicket">
+                    <tr>
+                        <td colspan="2" class="ticketLogo">Fast Chicken</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="orderNum">Orden Nro: @Model.OrderNum.ToString("D8")</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="ticketTitle">PEDIDO</td>
+                    </tr>
+                    <tr>
+                        <td class="ticketSubTitle">CANTIDAD</td>
+                        <td class="ticketSubTitle">DETALLE</td>
+                    </tr>
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td class="ticketCantidad">1</td>
+                            <td class="ticketConcepto1">Principal: @item.Name</td>
+                        </tr>
+                        <tr><td>&nbsp;</td><td class="ticketConcepto2">Gaseosa: @item.Drink @(item.Ice ? " con hielo" : " sin hielo")</td></tr>
+                        @if (item.Type == "PO")
+                        {
+                            <tr><td>&nbsp;</td><td class="ticketConcepto3"> Guarnición: @item.Side</td></tr>
+                        }
+                    }
+                </table>
+             </div>
+        </td></tr>
+    </table>
+</div>
+<div id="alertFinish" class="container text-center d-flex justify-content-center screen">
     <div class="row align-items-center">
         <div class="col">
             <h2 class="text-success">Pedido Realizado <i class="bi bi-check2-circle"></i></h2>
