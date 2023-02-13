@@ -6,7 +6,7 @@ function Danger(msg) {
 }
 
 function FinishDay() {
-    orderNum = 0;
+//    orderNum = 0;
 }
 
 function FinishOrder() {

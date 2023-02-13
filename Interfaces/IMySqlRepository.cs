@@ -6,6 +6,11 @@ namespace FastChicken.Interfaces
 	public interface IMySqlRepository
     {
         List<Combo> GetCombos();
-        void AddOrder(Order newOrder);
+        int AddOrder(Order newOrder);
+        void AddOrderItem(OrderItem newOrderItem);
+        int getNewNumOrder();
+
+        int startCashJournal();
+        int endCashJournal();
     }
 }
