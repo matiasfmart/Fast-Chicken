@@ -193,6 +193,14 @@ namespace FastChicken.DBConnection
                     command.Parameters.AddWithValue("@idCashJournal", idCashJournal);
 
                     command.ExecuteNonQuery();
+
+                    command = connection.CreateCommand();
+
+                    command.CommandText = "UPDATE NumOrders SET id=0";
+
+                    command.ExecuteNonQuery();
+
+                    command.Dispose();
                 }
 
                 command.Dispose();

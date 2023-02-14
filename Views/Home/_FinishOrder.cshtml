@@ -5,31 +5,35 @@
             <div id="cliente">
                 <table class="tableTicket">
                      <tr>
-                        <td colspan="2" class="ticketLogo">Fast Chicken</td>
+                        <td colspan="3" class="ticketLogo">Fast Chicken</td>
                     </tr>
                      <tr>
-                         <td colspan="2" class="orderNum">Orden Nro: @Model.OrderNum.ToString("D8")</td>
+                         <td colspan="3" class="orderNum">Orden Nro: @Model.OrderNum.ToString("D8")</td>
                      </tr>
                      <tr>
-                         <td colspan="2" class="ticketTitle">PEDIDO</td>
+                         <td colspan="3" class="ticketTitle">PEDIDO</td>
                      </tr>
                      <tr>
                          <td class="ticketSubTitle">CANTIDAD</td>
                          <td class="ticketSubTitle">DETALLE</td>
+                         <td class="ticketSubTitle">Total</td>
                      </tr>
+                     <tr><td colspan="3"><hr class="line" /><td></tr>
                     @foreach( var item in Model.Items)
                      {
                          <tr>
-                            <td class="ticketCantidad">1</td>
-                            <td class="ticketConcepto1">Principal: @item.Name</td>
+                                <td class="ticketCantidad" valign="top">1</td>
+                                <td class="ticketConcepto1" valign="top">Principal: @item.Name</td>
+                                <td class="ticketSubTotal" valign="top">@string.Format("{0:C}", @item.Price) </td>
                         </tr>
-                        <tr><td>&nbsp;</td><td class="ticketConcepto2">Gaseosa: @item.Drink @(item.Ice ? " con hielo" : " sin hielo")</td></tr>
+                            <tr><td>&nbsp;</td><td class="ticketConcepto2">Gaseosa: @item.Drink @(item.Ice ? " con hielo" : " sin hielo")</td><td>&nbsp;</td></tr>
                         @if( item.Type == "PO") {
-                            <tr><td>&nbsp;</td><td class="ticketConcepto3"> Guarnición: @item.Side</td></tr>
+                                <tr><td>&nbsp;</td><td class="ticketConcepto3"> Guarnición: @item.Side</td><td>&nbsp;</td></tr>
                         }
+                        <tr><td colspan="3"><hr class="line" /><td></tr>
                     }
                     <tr>
-                        <td colspan="2" class="ticketTotal">Total: @string.Format("{0:C}", Model.Total)</td>
+                        <td colspan="3" class="ticketTotal">Total: @string.Format("{0:C}", Model.Total)</td>
                     </tr>
                 </table>
             </div>
@@ -48,17 +52,20 @@
                         <td class="ticketSubTitle">CANTIDAD</td>
                         <td class="ticketSubTitle">DETALLE</td>
                     </tr>
+                    <tr><td colspan="3"><hr class="line" /><td></tr>
+
                     @foreach (var item in Model.Items)
                     {
                         <tr>
                             <td class="ticketCantidad">1</td>
-                            <td class="ticketConcepto1">Principal: @item.Name</td>
+                            <td class="ticketConcepto1" valign="top">Principal: @item.Name</td>
                         </tr>
                         <tr><td>&nbsp;</td><td class="ticketConcepto2">Gaseosa: @item.Drink @(item.Ice ? " con hielo" : " sin hielo")</td></tr>
                         @if (item.Type == "PO")
                         {
                             <tr><td>&nbsp;</td><td class="ticketConcepto3"> Guarnición: @item.Side</td></tr>
                         }
+                        <tr><td colspan="3"><hr class="line" /><td></tr>
                     }
                 </table>
              </div>
