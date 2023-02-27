@@ -7,9 +7,20 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <h4 class="mb-3 fw-bold">Bebidas</h4>
+
+            @if (ViewBag.Drinks.Count > 0)
+            {
+                <h4 class="mb-3 fw-bold">Bebidas</h4>
                 <div class="container">
                     <div class="row mb-4">
+                        @foreach( var drink in ViewBag.Drinks)
+                        {
+                            <div class="col-md-3 text-center">
+                                <input type="radio" class="btn-check" name="drink" id="@drink.Name.ToLower()" data-quantity="@drink.Quantity" data-name="@drink.Name" data-id="@drink.idDrink" autocomplete="off">
+                                <label class="item_modal_drink fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="@drink.Name.ToLower()">@drink.Name</label>
+                            </div>
+                        }
+                        <!--
                         <div class="col-md-3 text-center">
                             <input type="radio" class="btn-check" name="drink" id="coca" autocomplete="off">
                             <label class="item_modal_drink fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="coca">Coca</label>
@@ -25,7 +36,7 @@
                         <div class="col-md-3 text-center">
                             <input type="radio" class="btn-check" name="drink" id="jugo" autocomplete="off">
                             <label class="item_modal_drink fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="jugo">Jugo</label>
-                        </div>
+                        </div>-->
                     </div>
                     <div class="row mb-4">
                         <div class="col text-center">
@@ -38,13 +49,21 @@
                         </div>
                     </div>
                 </div>
-            <hr>
-            @if (Model.Type == "PO")
-            {
+                <hr>
+            }
+            @if (ViewBag.Sides.Count > 0)
+            {               
                 <h4 class="mb-3 fw-bold">Guarnicion</h4>
                 <div class="container">
                     <div class="row mb-4">
-                        <div class="col text-center">
+                        @foreach( var side in ViewBag.Sides)
+                        {
+                            <div class="col text-center">
+                                <input type="radio" class="btn-check" name="side" onchange="changeSide('@side.Name.ToLower()')" id="@side.Name.ToLower()" data-quantity="@side.Quantity" data-name="@side.Name" data-id="@side.idSide" autocomplete="off">
+                                <label class="item_modal_side fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="@side.Name.ToLower()">@side.Name</label>
+                            </div>
+                        }
+                        <!--<div class="col text-center">
                             <input type="radio" class="btn-check" name="side" id="arroz" autocomplete="off">
                             <label class="item_modal_side fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="arroz">Arroz</label>
                         </div>
@@ -55,7 +74,7 @@
                         <div class="col text-center">
                             <input type="radio" class="btn-check" name="side" id="papas" autocomplete="off">
                             <label class="item_modal_side fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="papas">Papas</label>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <hr>
@@ -63,7 +82,20 @@
             <h4 class="mb-3 fw-bold text-center">@string.Format("{0:C}", Convert.ToDouble(Model.Price))</h4>
         </div>
 
-        <div id="msg-container"></div>
+        <div id="msg-container">
+            @if( ViewBag.SideOutStock )
+            {
+                <div id='msg'><div class='alert-msg'><i class='bi bi-x-circle'></i>No hay stock de la guarnición seleccionada</div></div>
+            }
+            @if (ViewBag.DrinkOutStock)
+            {
+                <div id='msg'><div class='alert-msg'><i class='bi bi-x-circle'></i>No hay stock de la bebida seleccionada</div></div>
+            }
+            @if (ViewBag.ProductOutStock)
+            {
+                <div id='msg'><div class='alert-msg'><i class='bi bi-x-circle'>No hay stock del producto seleccionado</i></div></div>
+            }
+        </div>
 
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

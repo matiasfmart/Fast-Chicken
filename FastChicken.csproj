@@ -20,6 +20,7 @@
     <Folder Include="Interfaces\" />
     <Folder Include="DBConnection\" />
     <Folder Include="wwwroot\img\" />
+    <Folder Include="wwwroot\js\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="MySql.Data" />

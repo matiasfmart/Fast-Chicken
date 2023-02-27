@@ -20,12 +20,18 @@
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="row justify-content-center">
-                                    <label>@item.Side</label>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <label>@item.Drink</label>
-                                </div>
+                                @if( item.idSide != -1 )
+                                {
+                                    <div class="row justify-content-center">
+                                        <label>@item.Side</label>
+                                    </div>
+                                }
+                                @if( item.idDrink != -1 )
+                                {
+                                    <div class="row justify-content-center">
+                                        <label>@item.Drink</label>
+                                    </div>   
+                                }
                             </div>
                             <div class="col-2 d-flex justify-content-end">
                                 @*<button class='btn btn-success mx-1' onclick="ModalUpdateItem('@item.OrderItemId')">

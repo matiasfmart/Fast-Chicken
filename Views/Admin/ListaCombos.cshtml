@@ -1,0 +1,42 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    <div class="table-responsive">
+        <table class="table align-middle border">
+            <thead class="table-light">
+                <tr>
+                    <th class="col text-center">Nombre</th>
+                    <th class="col text-center">Descripci&oacute;n</th>
+                    <th class="col text-center">Tipo</th>
+                    <th class="col-1 text-center">&nbsp;</th>
+                    <th class="col-1 text-center">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody scope="table-group-divider">
+                @foreach(var combo in ViewBag.Combos)
+                {
+                    <tr>
+                        <td class="col text-center">
+                            @combo.Name
+                        </td>
+                        <td class="col">
+                            @combo.Description
+                        </td>
+                        <td class="col text-center">
+                            @combo.Type
+                        </td>
+                        <td class="col-1 text-center">
+                                <a href="@Url.Action("Combo", "Admin", new { id = @combo.ComboId })">
+                                <button type="button" class="btn btn-success">
+                                Editar
+                                </button>
+                            </a>
+                        </td>
+                        <!--<td class="col-1 text-center"><button type="button" class="btn btn-danger">Borrar</button></td>-->
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

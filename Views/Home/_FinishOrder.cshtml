@@ -26,9 +26,15 @@
                                 <td class="ticketConcepto1" valign="top">Principal: @item.Name</td>
                                 <td class="ticketSubTotal" valign="top">@string.Format("{0:C}", @item.Price) </td>
                         </tr>
-                            <tr><td>&nbsp;</td><td class="ticketConcepto2">Gaseosa: @item.Drink @(item.Ice ? " con hielo" : " sin hielo")</td><td>&nbsp;</td></tr>
+                            @if( item.idDrink != -1 )
+                            {
+                            <tr><td>&nbsp;</td><td class="ticketConcepto2">Gaseosa: @item.Drink @(item.Ice ? " con hielo" : " sin hielo")</td><td>&nbsp;</td></tr>                                
+                            }
                         @if( item.Type == "PO") {
-                                <tr><td>&nbsp;</td><td class="ticketConcepto3"> Guarnición: @item.Side</td><td>&nbsp;</td></tr>
+                                @if( item.idSide != -1 )
+                                {
+                                    <tr><td>&nbsp;</td><td class="ticketConcepto3"> Guarnición: @item.Side</td><td>&nbsp;</td></tr>
+                                }
                         }
                         <tr><td colspan="3"><hr class="line" /><td></tr>
                     }
@@ -60,10 +66,17 @@
                             <td class="ticketCantidad">1</td>
                             <td class="ticketConcepto1" valign="top">Principal: @item.Name</td>
                         </tr>
-                        <tr><td>&nbsp;</td><td class="ticketConcepto2">Gaseosa: @item.Drink @(item.Ice ? " con hielo" : " sin hielo")</td></tr>
+                            @if( item.idDrink != -1 )
+                            {
+                                <tr><td>&nbsp;</td><td class="ticketConcepto2">Gaseosa: @item.Drink @(item.Ice ? " con hielo" : " sin hielo")</td></tr>
+                            }
                         @if (item.Type == "PO")
                         {
-                            <tr><td>&nbsp;</td><td class="ticketConcepto3"> Guarnición: @item.Side</td></tr>
+                            @if( item.idSide != -1 )
+                            {
+                                <tr><td>&nbsp;</td><td class="ticketConcepto3"> Guarnición: @item.Side</td></tr>
+                            }
+
                         }
                         <tr><td colspan="3"><hr class="line" /><td></tr>
                     }
