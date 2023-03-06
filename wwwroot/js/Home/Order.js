@@ -5,8 +5,16 @@ function Danger(msg) {
     $("#msg-container").html("<div id='msg'><div class='error-msg'><i class='bi bi-x-circle'></i> " + msg + "</div></div>");
 }
 
+function Warning(msg) {
+    $("#msg-container").html("<div id='msg'><div class='alert-msg'><i class='bi bi-x-circle'></i> " + msg + "</div></div>");
+}
+
+function ClearMessage() {
+    $("#msg-container").html("");
+}
+
 function FinishDay() {
-    orderNum = 0;
+//    orderNum = 0;
 }
 
 function FinishOrder() {
@@ -14,10 +22,25 @@ function FinishOrder() {
     $('#orderView').load('/Home/FinishOrder', { items: orderItems, total: total, orderNum: orderNum }, function (response, status, xhr) {
         debugger
         if (status == 'success') {
+
+            console.log(orderItems);
+            console.log(orderNum);
+            console.log(total);
+
             $('#dialog').modal('hide');
             orderItems = [];
             orderItemId = 0;
             orderNum++;
+
+            // cliente
+            $('#cocina').hide();
+            $('#cliente').show();
+            window.print();
+
+            // Cocina
+            $('#cliente').hide();
+            $('#cocina').show();
+            window.print();
         }
     })
 }
@@ -72,9 +95,45 @@ function GetCombo(id, name, type, price) {
 var orderItemId = 0;
 function GetOrderItem(id, name, price, type) {
     orderItemId++;
-    let drink;
-    let ice;
-    let side;
+    let drink=-1;
+    let ice=-1;
+    let side=-1;
+    let idDrink = -1;
+    let idSide = -1;
+    let quantity = 0;
+    let count = 0;
+
+    count = 0;
+    $('input[type="radio"][name="drink"]').each(function () {
+        count++;
+        if ($(this).prop("checked")) {
+            drink = $(this).data("name");
+            idDrink = $(this).data("id");
+            quantity = $(this).data("quantity");
+        }
+    });
+
+    if (count != 0 && drink == -1) return false;
+    else if (quantity <= 0) {
+        Warning("El producto esta sin stock");
+    }
+
+    count = 0;
+    $('input[type="radio"][name="side"]').each(function () {
+        count++;
+        if ($(this).prop("checked")) {
+            side = $(this).data("name");
+
+            idSide = $(this).data("id");
+            quantity = $(this).data("quantity");
+        }
+    });
+
+    if (count != 0 && side == -1) return false; 
+    else if (quantity <= 0) {
+        Warning("El producto esta sin stock");
+    }
+    /*
     if ($('input[type="radio"][name="drink"][id=sprite]').prop('checked')) {
         drink = "Sprite";
     } else if ($('input[type="radio"][name="drink"][id=coca]').prop('checked')) {
@@ -106,7 +165,7 @@ function GetOrderItem(id, name, price, type) {
     } else {
         return false;
     }
-
+    */
     var obj = {     
         ComboId: id,
         OrderItemId : orderItemId,
@@ -114,6 +173,8 @@ function GetOrderItem(id, name, price, type) {
         Price: price,
         Side: side,
         Drink: drink,
+        IdSide: idSide,
+        IdDrink: idDrink,
         Ice: ice,
         Type: type
     }
@@ -136,6 +197,7 @@ function AddOrderItems(items) {
 
 var orderItems = [];
 function AddItem(id, name, price, type) {
+    
     var item = GetOrderItem(id, name, price, type);
     if (item) {
         orderItems.push(item);
@@ -155,6 +217,22 @@ function ClearItems() {
     orderItems = [];
     orderItemId = 0;
     AddOrderItems(orderItems);
+}
+
+function changeSide(id) {
+    if ($("#" + id).data('quantity') <= 0) {
+        Warning("No hay stock de la guarnición seleccionada");
+    } else {
+        ClearMessage();
+    }
+}
+
+function changeDrink(id) {
+    if ($("#" + id).data('quantity') <= 0) {
+        Warning("No hay stock de la bebida seleccionada");
+    } else {
+        ClearMessage();
+    }
 }
 
 //function ModalUpdateItem(id) {

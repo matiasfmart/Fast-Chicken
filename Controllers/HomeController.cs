@@ -35,19 +35,123 @@ namespace FastChicken.Controllers
 
         public IActionResult Order()
         {
+
+            _mySqlRepository.startCashJournal();
+
             return View();
         }
 
         [HttpGet]
         public IActionResult GetCombos()
         {
+            Combo combo = null;
             List<Combo> combos = _mySqlRepository.GetCombos();
+
+            IList<Side> sides = _mySqlRepository.getSides();
+            IList<Product> products = _mySqlRepository.getProducts();
+            IList<Drink> drinks = _mySqlRepository.getDrinks();
+
+            foreach ( var side in sides)
+            {
+                combo = new Combo();
+
+                combo.Name = side.Name;
+                combo.ComboId = side.idSide.ToString();
+                combo.Description = "";
+                combo.Type = "ES";
+                combo.Price = side.Price.ToString();
+
+                combos.Add(combo);
+            }
+
+            foreach (var product in products)
+            {
+                combo = new Combo();
+
+                combo.Name = product.Name;
+                combo.ComboId = product.idProduct.ToString();
+                combo.Description = "";
+                combo.Type = "EP";
+
+                combo.Price = product.Price.ToString();
+
+                combos.Add(combo);
+            }
+
+            combo = new Combo();
+
+            combo.Name = "Bebidas";
+            combo.ComboId = "D";
+            combo.Description = "";
+            combo.Type = "E";
+            combo.Price = drinks[0].Price.ToString();
+
+            combos.Add(combo);
 
             return PartialView("_CombosList",combos);
         }
 
         public IActionResult LoadComboModal(Combo combo)
         {
+
+            ViewBag.SideOutStock = false;
+            ViewBag.DrinkOutStock = false;
+            ViewBag.ProductOutStock = false;
+
+            switch ( combo.Type )
+            {
+                case "PO":
+                case "BG":
+                    ViewBag.Drinks = this._mySqlRepository.getDrinksByCombo(combo.ComboId);
+                    ViewBag.Sides = this._mySqlRepository.getSidesByCombo(combo.ComboId);
+
+                    IList<Product> products = this._mySqlRepository.getProductsByCombo(combo.ComboId);
+
+                    for(int i=0; i < products.Count; i++)
+                    {
+                        int quantity = this._mySqlRepository.GetComboQuantity(combo.ComboId, products[i].idProduct, "P");
+
+                        if( quantity > products[i].Quantity )
+                        {
+                            ViewBag.ProductOutStock = true;
+                        }
+                    }
+
+                    break;
+                case "E":
+                    if( combo.ComboId=="D" )
+                    {
+                        ViewBag.Drinks = this._mySqlRepository.getDrinks();
+                        ViewBag.Sides = new List<Side>();
+                    }
+                    else
+                    {
+                        ViewBag.Drinks = new List<Drink>();
+                        ViewBag.Sides = new List<Side>();
+                    }
+                    break;
+                case "ES":
+                    Side side = this._mySqlRepository.getSide(Convert.ToInt32(combo.ComboId));
+
+                    if(side != null && side.Quantity <= 0 )
+                    {
+                        ViewBag.SideOutStock = true;
+                    }
+                    ViewBag.Drinks = new List<Drink>();
+                    ViewBag.Sides = new List<Side>();
+                    break;
+                case "EP":
+                    Product product = this._mySqlRepository.getProduct(Convert.ToInt32(combo.ComboId));
+
+                    if (product!= null && product.Quantity <= 0)
+                    {
+                        ViewBag.ProductOutStock = true;
+                    }
+                    ViewBag.Drinks = new List<Drink>();
+                    ViewBag.Sides = new List<Side>();
+                    break;
+            }
+
             return PartialView("_ModalCombo", combo);
         }
 
@@ -82,21 +186,66 @@ namespace FastChicken.Controllers
         {
             Order newOrder = new Order();
 
+            orderNum = _mySqlRepository.getNewNumOrder();
+
             newOrder.Total = total;
             newOrder.Date = DateTime.Now;
             newOrder.OrderNum = orderNum;
+            newOrder.Items = items;
 
-            _mySqlRepository.AddOrder(newOrder);
+            var idOrder = _mySqlRepository.AddOrder(newOrder);
+
+            foreach( var item in items)
+            {
+                item.OrderId = idOrder;
+                _mySqlRepository.AddOrderItem(item);
+
+                switch(item.Type)
+                {
+                    case "BG":
+                    case "PO":
+                        int quantity = this._mySqlRepository.GetComboQuantity(item.ComboId, item.idDrink, "D");
+
+                        _mySqlRepository.DecrementDrink(item.idDrink, quantity);
+
+                        quantity = this._mySqlRepository.GetComboQuantity(item.ComboId, item.idSide, "S");
+
+                        _mySqlRepository.DecrementSide(item.idSide, quantity);
+
+                        IList<Product> products = this._mySqlRepository.getProductsByCombo(item.ComboId);
+
+                        foreach( var product in products)
+                        {
+                            quantity = this._mySqlRepository.GetComboQuantity(item.ComboId, product.idProduct, "P");
+                            _mySqlRepository.DecrementProduct(product.idProduct, quantity);
+                        }
+
+                        break;
+                    case "EP":
+                        _mySqlRepository.DecrementProduct(Convert.ToInt32(item.ComboId), 1);
+                        break;
+                    case "ES":
+                        _mySqlRepository.DecrementSide(Convert.ToInt32(item.ComboId), 1);
+                        break;
+                    case "E":
+                        _mySqlRepository.DecrementDrink(item.idDrink, 1);
+                        break;
+                }
+            }
 
             //setear combos pedidos a tabla en sql...
-            return PartialView("_FinishOrder");
+            return PartialView("_FinishOrder", newOrder);
         }
 
-        public void FinishDay()
+        public IActionResult FinishDay()
         {
             //orderId = 0;
             //ViewBag.Total = 0;
-            RedirectToAction("Index", "Home");
+            _mySqlRepository.endCashJournal();
+            
+            //RedirectToAction("Index", "Home");
+            return View("Index");
         }
+
     }
 }

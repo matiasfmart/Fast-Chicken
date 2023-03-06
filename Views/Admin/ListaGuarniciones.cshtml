@@ -1,0 +1,40 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    <div class="table-responsive">
+        <table class="table align-middle border">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col">Producto</th>
+                    <th class="col-1 text-center">Stock Actual</th>
+                    <th class="col-1 text-center">Stock Nuevo</th>
+                    <th class="col-1 text-center">&nbsp;</th>
+                    <th class="col-1 text-center">&nbsp;</th>
+                    <th class="col-1 text-center">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody scope="table-group-divider">
+                @foreach(var side in ViewBag.Sides)
+                {
+                    <tr>
+                        <td scope="col">@side.Name</td>
+                        <td class="col-1 text-center">
+                            <div class="badge bg-primary text-wrap fs-6">
+                                @side.Quantity
+                            </div>
+                        </td>
+                        <td class="col-1 text-center">
+                            <div id="quantity_@side.idSide" data-id="@side.idSide" data-quantity="@side.Quantity" class="badge bg-warning text-wrap fs-6">
+                                @side.Quantity
+                            </div>
+                        </td>
+                        <td class="col-1 text-center"><button type="button" onclick="Quitar(@side.idSide)" class="btn btn-danger">Quitar</button></td>
+                        <td class="col-1 text-center"><button type="button" onclick="Agregar(@side.idSide)" class="btn btn-success">Agregar</button></td>
+                        <td class="col-1 text-center"><input type="text" id="value_@side.idSide" class="form-control"></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

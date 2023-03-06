@@ -1,0 +1,31 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_LayoutAdmin";
+
+    <div class="container mt-4">
+        <div class="row d-flex justify-content-between">
+            <div class="col">
+                <h1>Control de Stock &nbsp;<i class="bi bi-box-seam-fill"></i></h1>
+            </div>
+        </div>
+    </div>
+    <div class="container shadow bg-white mt-4">
+        <div class="row p-4">
+            <div class="col">
+                <button type="button" class="btn btn-primary" id="btnActualizarGuarniciones">Actualizar</button>
+                <button type="button" class="btn btn-danger" id="btnDeshacerGuarniciones">Deshacer</button>
+            </div>
+        </div>
+        <div class="row px-4" id="ListaGuarniciones">
+        </div>
+    </div>
+}
+@section Scripts {
+    <script language="Javascript">
+        document.addEventListener('DOMContentLoaded', function (event) {
+            LoadGuarniciones();
+        })
+    </script>
+}

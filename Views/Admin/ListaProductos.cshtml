@@ -1,0 +1,40 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    <div class="table-responsive">
+        <table class="table align-middle border">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col">Producto</th>
+                    <th class="col-1 text-center">Stock Actual</th>
+                    <th class="col-1 text-center">Stock Nuevo</th>
+                    <th class="col-1 text-center">&nbsp;</th>
+                    <th class="col-1 text-center">&nbsp;</th>
+                    <th class="col-1 text-center">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody scope="table-group-divider">
+                @foreach(var product in ViewBag.Products)
+                {
+                    <tr>
+                        <td scope="col">@product.Name</td>
+                        <td class="col-1 text-center">
+                            <div class="badge bg-primary text-wrap fs-6">
+                                @product.Quantity
+                            </div>
+                        </td>
+                        <td class="col-1 text-center">
+                            <div id="quantity_@product.idProduct" data-id="@product.idProduct" data-quantity="@product.Quantity" class="badge bg-warning text-wrap fs-6">
+                                @product.Quantity
+                            </div>
+                        </td>
+                        <td class="col-1 text-center"><button type="button" onclick="Quitar(@product.idProduct)" class="btn btn-danger">Quitar</button></td>
+                        <td class="col-1 text-center"><button type="button" onclick="Agregar(@product.idProduct)" class="btn btn-success">Agregar</button></td>
+                        <td class="col-1 text-center"><input type="text" id="value_@product.idProduct" class="form-control"></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

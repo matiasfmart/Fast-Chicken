@@ -20,6 +20,7 @@
     <Folder Include="Interfaces\" />
     <Folder Include="DBConnection\" />
     <Folder Include="wwwroot\img\" />
+    <Folder Include="wwwroot\js\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="MySql.Data" />
@@ -27,4 +28,5 @@
     <None Remove="DBConnection\" />
     <None Remove="toastr" />
   </ItemGroup>
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 </Project>
