@@ -157,7 +157,7 @@ function GetOrderItem(id, name, price, type) {
             return false;
         }
     }
-
+    */
     if ($('input[type="radio"][name="ice"][id=con]').prop('checked')) {
         ice = true;
     } else if ($('input[type="radio"][name="ice"][id=sin]').prop('checked')) {
@@ -165,7 +165,7 @@ function GetOrderItem(id, name, price, type) {
     } else {
         return false;
     }
-    */
+    
     var obj = {     
         ComboId: id,
         OrderItemId : orderItemId,
