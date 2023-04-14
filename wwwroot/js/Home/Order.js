@@ -114,8 +114,18 @@ function GetOrderItem(id, name, price, type) {
     });
 
     if (count != 0 && drink == -1) return false;
-    else if (quantity <= 0) {
+    else if (count != 0  && quantity <= 0) {
         Warning("El producto esta sin stock");
+    }
+
+    if (count > 0) {   // Si tiene bebida aplica con hielo o sin hielo
+        if ($('input[type="radio"][name="ice"][id=con]').prop('checked')) {
+            ice = true;
+        } else if ($('input[type="radio"][name="ice"][id=sin]').prop('checked')) {
+            ice = false
+        } else {
+            return false;
+        }
     }
 
     count = 0;
@@ -158,13 +168,7 @@ function GetOrderItem(id, name, price, type) {
         }
     }
     */
-    if ($('input[type="radio"][name="ice"][id=con]').prop('checked')) {
-        ice = true;
-    } else if ($('input[type="radio"][name="ice"][id=sin]').prop('checked')) {
-        ice = false
-    } else {
-        return false;
-    }
+
     
     var obj = {     
         ComboId: id,
