@@ -19,13 +19,10 @@ function FinishDay() {
 
 function FinishOrder() {
     debugger
-    $('#orderView').load('/Home/FinishOrder', { items: orderItems, total: total, orderNum: orderNum }, function (response, status, xhr) {
+    let hereToGo = $('input[type="radio"][name="delivery"][id=ToGo]').prop('checked') ? true : false;
+    $('#orderView').load('/Home/FinishOrder', { items: orderItems, total: total, orderNum: orderNum, hereToGo: hereToGo }, function (response, status, xhr) {
         debugger
         if (status == 'success') {
-
-            console.log(orderItems);
-            console.log(orderNum);
-            console.log(total);
 
             $('#dialog').modal('hide');
             orderItems = [];

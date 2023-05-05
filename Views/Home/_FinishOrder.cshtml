@@ -16,28 +16,31 @@
                      <tr>
                          <td class="ticketSubTitle">CANTIDAD</td>
                          <td class="ticketSubTitle">DETALLE</td>
-                         <td class="ticketSubTitle">Total</td>
+                         <td class="ticketSubTitle">TOTAL</td>
                      </tr>
                      <tr><td colspan="3"><hr class="line" /><td></tr>
                     @foreach( var item in Model.Items)
                      {
                          <tr>
                                 <td class="ticketCantidad" valign="top">1</td>
-                                <td class="ticketConcepto1" valign="top">Principal: @item.Name</td>
+                                <td class="ticketConcepto1" valign="top">@item.Name</td>
                                 <td class="ticketSubTotal" valign="top">@string.Format("{0:C}", @item.Price) </td>
                         </tr>
                             @if( item.idDrink != -1 )
                             {
-                            <tr><td>&nbsp;</td><td class="ticketConcepto2">Gaseosa: @item.Drink @(item.Ice ? " con hielo" : " sin hielo")</td><td>&nbsp;</td></tr>                                
+                            <tr><td>&nbsp;</td><td class="ticketConcepto2">@item.Drink @(item.Ice ? " con hielo" : " sin hielo")</td><td>&nbsp;</td></tr>                                
                             }
                         @if( item.Type == "PO") {
                                 @if( item.idSide != -1 )
                                 {
-                                    <tr><td>&nbsp;</td><td class="ticketConcepto3"> Guarnición: @item.Side</td><td>&nbsp;</td></tr>
+                                    <tr><td>&nbsp;</td><td class="ticketConcepto3">@item.Side</td><td>&nbsp;</td></tr>
                                 }
                         }
                         <tr><td colspan="3"><hr class="line" /><td></tr>
                     }
+                    <tr>
+                        @if (Model.HereToGo) { <td colspan="3" class="ticketTotal">Para llevar</td>} else { <td colspan="3" class="ticketTotal">Para Comer Aca</td> }
+                    </tr>
                     <tr>
                         <td colspan="3" class="ticketTotal">Total: @string.Format("{0:C}", Model.Total)</td>
                     </tr>
@@ -66,19 +69,23 @@
                             <td class="ticketCantidad">1</td>
                             <td class="ticketConcepto1" valign="top">Principal: @item.Name</td>
                         </tr>
-                            @if( item.idDrink != -1 )
-                            {
-                                <tr><td>&nbsp;</td><td class="ticketConcepto2">Gaseosa: @item.Drink @(item.Ice ? " con hielo" : " sin hielo")</td></tr>
-                            }
+                        @if (item.idDrink != -1)
+                        {
+                            <tr><td>&nbsp;</td><td class="ticketConcepto2">Gaseosa: @item.Drink @(item.Ice ? " con hielo" : " sin hielo")</td></tr>
+                        }
                         @if (item.Type == "PO")
                         {
-                            @if( item.idSide != -1 )
+                            @if (item.idSide != -1)
                             {
                                 <tr><td>&nbsp;</td><td class="ticketConcepto3"> Guarnición: @item.Side</td></tr>
                             }
 
                         }
                         <tr><td colspan="3"><hr class="line" /><td></tr>
+
+                        <tr>
+                            @if (Model.HereToGo) { <td colspan="3" class="ticketTotal">Para llevar</td> } else { <td colspan="3" class="ticketTotal">Para Comer Aca</td> }
+                        </tr>
                     }
                 </table>
              </div>
