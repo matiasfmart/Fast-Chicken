@@ -160,7 +160,7 @@ namespace FastChicken.Controllers
             var total = 0;
             foreach (var item in items)
             {
-                total = total + int.Parse(item.Price);
+                total = total + (item.Count * int.Parse(item.Price));
             }
 
             ViewBag.Total = total;

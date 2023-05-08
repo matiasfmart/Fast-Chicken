@@ -177,7 +177,8 @@ function GetOrderItem(id, name, price, type) {
         IdSide: idSide,
         IdDrink: idDrink,
         Ice: ice,
-        Type: type
+        Type: type,
+        Count: 1
     }
     //if ($('input[type="radio"][name="ice"][id=con]').prop('checked')) {
     //    ice = true;
@@ -188,6 +189,7 @@ function GetOrderItem(id, name, price, type) {
 }
 
 function AddOrderItems(items) {
+    debugger
     items.length == 0 ? $('#btnFinishOrder').prop('disabled', true) : $('#btnFinishOrder').prop('disabled', false);
     $('#order_items').load('/Home/AddOrderItems', { items: items }, function (response, status, xhr) {
         if (status == 'success') {
@@ -196,15 +198,37 @@ function AddOrderItems(items) {
     })
 }
 
+function IncrementExistItem(id) {
+    debugger
+    itemFound = orderItems.find(e => e.ComboId === id);
+    itemFound.Count++;
+    AddOrderItems(orderItems);
+}
+
+function DecrementExistItem(id) {
+    debugger
+    itemFound = orderItems.find(e => e.ComboId === id);
+    itemFound.Count--;
+    AddOrderItems(orderItems);
+}
+
 var orderItems = [];
 function AddItem(id, name, price, type) {
-    
+    debugger
     var item = GetOrderItem(id, name, price, type);
-    if (item) {
-        orderItems.push(item);
+    var existItem = orderItems.find((e) => {
+        return (e.ComboId === id && e.Name === item.Name && e.Price === item.Price && e.IdSide === item.IdSide && e.IdDrink === item.IdDrink && e.Ice === item.Ice);
+    });
+    if (existItem) {
+        existItem.Count++;
         AddOrderItems(orderItems);
     } else {
-        Danger("El menu esta incompleto.")
+        if (item) {
+            orderItems.push(item);
+            AddOrderItems(orderItems);
+        } else {
+            Danger("El menu esta incompleto.") 
+        }
     }
 }
 

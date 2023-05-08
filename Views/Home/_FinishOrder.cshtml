@@ -22,9 +22,9 @@
                     @foreach( var item in Model.Items)
                      {
                          <tr>
-                                <td class="ticketCantidad" valign="top">1</td>
+                                <td class="ticketCantidad" valign="top">@item.Count</td>
                                 <td class="ticketConcepto1" valign="top">@item.Name</td>
-                                <td class="ticketSubTotal" valign="top">@string.Format("{0:C}", @item.Price) </td>
+                                <td class="ticketSubTotal" valign="top">@string.Format("{0:C}", @item.Price) C/u </td>
                         </tr>
                             @if( item.idDrink != -1 )
                             {
