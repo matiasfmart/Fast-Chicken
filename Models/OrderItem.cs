@@ -14,5 +14,6 @@ namespace FastChicken.Models
 		public int idDrink { get; set; }
 		public bool Ice { get; set; }
 		public string Type { get; set; }
-    }
+		public int Count { get; set; }
+	}
 }

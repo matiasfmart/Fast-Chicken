@@ -160,7 +160,7 @@ namespace FastChicken.Controllers
             var total = 0;
             foreach (var item in items)
             {
-                total = total + int.Parse(item.Price);
+                total = total + (item.Count * int.Parse(item.Price));
             }
 
             ViewBag.Total = total;
@@ -182,7 +182,7 @@ namespace FastChicken.Controllers
             return PartialView("_ModalConfirmFinishOrder");
         }
 
-        public IActionResult FinishOrder(List<OrderItem> items, int total, int orderNum)
+        public IActionResult FinishOrder(List<OrderItem> items, int total, int orderNum, bool hereToGo)
         {
             Order newOrder = new Order();
 
@@ -192,6 +192,7 @@ namespace FastChicken.Controllers
             newOrder.Date = DateTime.Now;
             newOrder.OrderNum = orderNum;
             newOrder.Items = items;
+            newOrder.HereToGo = hereToGo;
 
             var idOrder = _mySqlRepository.AddOrder(newOrder);
 
