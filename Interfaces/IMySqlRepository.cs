@@ -15,6 +15,7 @@ namespace FastChicken.Interfaces
         int endCashJournal();
         bool checkPassword(string username, string password);
         IList<Drink> getDrinks();
+        IList<Drink> getBigDrinks();
         IList<Side> getSides();
         Drink getDrink(int id);
         Side getSide(int id);

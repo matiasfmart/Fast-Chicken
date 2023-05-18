@@ -115,7 +115,7 @@ function GetOrderItem(id, name, price, type) {
         Warning("El producto esta sin stock");
     }
 
-    if (count > 0) {   // Si tiene bebida aplica con hielo o sin hielo
+    if (count > 0 && id != "DG") {   // Si tiene bebida aplica con hielo o sin hielo
         if ($('input[type="radio"][name="ice"][id=con]').prop('checked')) {
             ice = true;
         } else if ($('input[type="radio"][name="ice"][id=sin]').prop('checked')) {

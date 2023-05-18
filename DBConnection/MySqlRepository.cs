@@ -275,6 +275,7 @@ namespace FastChicken.DBConnection
             }
             return drink;
         }
+
         public Side getSide(int id)
         {
             Side side = null;
@@ -300,6 +301,7 @@ namespace FastChicken.DBConnection
             }
             return side;
         }
+
         public Product getProduct(int id)
         {
             Product product = null;
@@ -325,6 +327,7 @@ namespace FastChicken.DBConnection
             }
             return product;
         }
+
         public IList<Drink> getDrinks()
         {
             List<Drink> drinks = new List<Drink>();
@@ -351,6 +354,34 @@ namespace FastChicken.DBConnection
             }
             return drinks;
         }
+
+        public IList<Drink> getBigDrinks()
+        {
+            List<Drink> drinks = new List<Drink>();
+            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            {
+                connection.Open();
+                string SQL = "select idDrink, Name, Price, Quantity from BigDrinks";
+                MySqlCommand mySqlCommand = new MySqlCommand(SQL, connection);
+                using (var reader = mySqlCommand.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        drinks.Add(new Drink()
+                        {
+                            idDrink = reader.GetInt32(0),
+                            Name = reader.GetString(1),
+                            Price = reader.GetDouble(2),
+                            Quantity = reader.GetInt32(3),
+                        });
+                    }
+                }
+
+                mySqlCommand.Dispose();
+            }
+            return drinks;
+        }
+
         public IList<Side> getSides()
         {
             List<Side> sides = new List<Side>();

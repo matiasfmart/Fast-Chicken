@@ -49,7 +49,7 @@ namespace FastChicken.Controllers
 
             IList<Side> sides = _mySqlRepository.getSides();
             IList<Product> products = _mySqlRepository.getProducts();
-            IList<Drink> drinks = _mySqlRepository.getDrinks();
+            //IList<Drink> drinks = _mySqlRepository.getDrinks();
 
             foreach ( var side in sides)
             {
@@ -80,11 +80,19 @@ namespace FastChicken.Controllers
 
             combo = new Combo();
 
-            combo.Name = "Bebidas";
+            combo.Name = "Bebidas Chicas";
             combo.ComboId = "D";
             combo.Description = "";
             combo.Type = "E";
-            combo.Price = drinks[0].Price.ToString();
+            combo.Price = "350";
+
+            combos.Add(combo);
+
+            combo.Name = "Bebidas Grandes";
+            combo.ComboId = "DG";
+            combo.Description = "";
+            combo.Type = "E";
+            combo.Price = "900";
 
             combos.Add(combo);
 
@@ -119,17 +127,17 @@ namespace FastChicken.Controllers
 
                     break;
                 case "E":
-                    if( combo.ComboId=="D" )
+                    if (combo.ComboId == "D")
                     {
                         ViewBag.Drinks = this._mySqlRepository.getDrinks();
                         ViewBag.Sides = new List<Side>();
                     }
                     else
                     {
-                        ViewBag.Drinks = new List<Drink>();
+                        ViewBag.Drinks = this._mySqlRepository.getBigDrinks();
                         ViewBag.Sides = new List<Side>();
                     }
-                    break;
+            break;
                 case "ES":
                     Side side = this._mySqlRepository.getSide(Convert.ToInt32(combo.ComboId));
 
@@ -155,7 +163,8 @@ namespace FastChicken.Controllers
             return PartialView("_ModalCombo", combo);
         }
 
-        public IActionResult AddOrderItems(List<OrderItem> items) {
+        public IActionResult AddOrderItems(List<OrderItem> items)
+        {
 
             var total = 0;
             foreach (var item in items)

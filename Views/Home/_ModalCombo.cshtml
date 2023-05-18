@@ -20,34 +20,20 @@
                                 <label class="item_modal_drink fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="@drink.Name.ToLower()">@drink.Name</label>
                             </div>
                         }
-                        <!--
-                        <div class="col-md-3 text-center">
-                            <input type="radio" class="btn-check" name="drink" id="coca" autocomplete="off">
-                            <label class="item_modal_drink fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="coca">Coca</label>
-                        </div>
-                        <div class="col-md-3 text-center">
-                            <input type="radio" class="btn-check" name="drink" id="sprite" autocomplete="off">
-                            <label class="item_modal_drink fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="sprite">Sprite</label>
-                        </div>
-                        <div class="col-md-3 text-center">
-                            <input type="radio" class="btn-check" name="drink" id="fanta" autocomplete="off">
-                            <label class="item_modal_drink fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="fanta">Fanta</label>
-                        </div>
-                        <div class="col-md-3 text-center">
-                            <input type="radio" class="btn-check" name="drink" id="jugo" autocomplete="off">
-                            <label class="item_modal_drink fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="jugo">Jugo</label>
-                        </div>-->
                     </div>
-                    <div class="row mb-4">
-                        <div class="col text-center">
-                            <input type="radio" class="btn-check" name="ice" id="con" autocomplete="off">
-                            <label class="item_modal_ice fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="con">Con Hielo</label>
+                    @if (Model.ComboId == "D")
+                    {
+                        <div class="row mb-4">
+                            <div class="col text-center">
+                                <input type="radio" class="btn-check" name="ice" id="con" autocomplete="off">
+                                <label class="item_modal_ice fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="con">Con Hielo</label>
+                            </div>
+                            <div class="col text-center">
+                                <input type="radio" class="btn-check" name="ice" id="sin" autocomplete="off">
+                                <label class="item_modal_ice fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="sin">Sin Hielo</label>
+                            </div>
                         </div>
-                        <div class="col text-center">
-                            <input type="radio" class="btn-check" name="ice" id="sin" autocomplete="off">
-                            <label class="item_modal_ice fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="sin">Sin Hielo</label>
-                        </div>
-                    </div>
+                    }
                 </div>
                 <hr>
             }
@@ -63,18 +49,6 @@
                                 <label class="item_modal_side fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="@side.Name.ToLower()">@side.Name</label>
                             </div>
                         }
-                        <!--<div class="col text-center">
-                            <input type="radio" class="btn-check" name="side" id="arroz" autocomplete="off">
-                            <label class="item_modal_side fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="arroz">Arroz</label>
-                        </div>
-                        <div class="col text-center">
-                            <input type="radio" class="btn-check" name="side" id="ensalada" autocomplete="off">
-                            <label class="item_modal_side fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="ensalada">Ensalada</label>
-                        </div>
-                        <div class="col text-center">
-                            <input type="radio" class="btn-check" name="side" id="papas" autocomplete="off">
-                            <label class="item_modal_side fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="papas">Papas</label>
-                        </div>-->
                     </div>
                 </div>
                 <hr>
