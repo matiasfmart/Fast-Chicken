@@ -87,6 +87,9 @@
                     <tr>
                         @if (Model.HereToGo) { <td colspan="3" class="ticketTotal">Para llevar</td> } else { <td colspan="3" class="ticketTotal">Para Comer Aca</td> }
                     </tr>
+                        <tr>
+                            <td colspan="3" class="ticketTotal">Total: @string.Format("{0:C}", Model.Total)</td>
+                        </tr>
                 </table>
              </div>
         </td></tr>
