@@ -78,23 +78,25 @@ namespace FastChicken.Controllers
                 combos.Add(combo);
             }
 
-            combo = new Combo();
+            Combo comboBebidaChica = new Combo();
 
-            combo.Name = "Bebidas Chicas";
-            combo.ComboId = "D";
-            combo.Description = "";
-            combo.Type = "E";
-            combo.Price = "350";
+            comboBebidaChica.Name = "Bebidas Chicas";
+            comboBebidaChica.ComboId = "D";
+            comboBebidaChica.Description = "";
+            comboBebidaChica.Type = "E";
+            comboBebidaChica.Price = "350";
 
-            combos.Add(combo);
+            combos.Add(comboBebidaChica);
 
-            combo.Name = "Bebidas Grandes";
-            combo.ComboId = "DG";
-            combo.Description = "";
-            combo.Type = "E";
-            combo.Price = "900";
+            Combo comboBebidaGrande = new Combo();
 
-            combos.Add(combo);
+            comboBebidaGrande.Name = "Bebidas Grandes";
+            comboBebidaGrande.ComboId = "DG";
+            comboBebidaGrande.Description = "";
+            comboBebidaGrande.Type = "E";
+            comboBebidaGrande.Price = "900";
+
+            combos.Add(comboBebidaGrande);
 
             return PartialView("_CombosList",combos);
         }
