@@ -13,12 +13,22 @@
                 <h4 class="mb-3 fw-bold">Bebidas</h4>
                 <div class="container">
                     <div class="row mb-4">
-                        @foreach( var drink in ViewBag.Drinks)
+                        @foreach (var drink in ViewBag.Drinks)
                         {
-                            <div class="col-md-3 text-center">
-                                <input type="radio" class="btn-check" name="drink" id="@drink.Name.ToLower()" data-quantity="@drink.Quantity" data-name="@drink.Name" data-id="@drink.idDrink" autocomplete="off">
-                                <label class="item_modal_drink fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="@drink.Name.ToLower()">@drink.Name</label>
-                            </div>
+                            if (Model.ComboId == "D")
+                            {
+                                <div class="col-md-3 text-center">
+                                    <input type="radio" class="btn-check" name="drink" id="@drink.Name.ToLower()" data-quantity="@drink.Quantity" data-name="@drink.Name" data-id="@drink.idDrink" autocomplete="off">
+                                    <label class="item_modal_drink fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="@drink.Name.ToLower()">@drink.Name</label>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-md-4 text-center">
+                                    <input type="radio" class="btn-check" name="drink" id="@drink.Name.ToLower()" data-quantity="@drink.Quantity" data-name="@drink.Name" data-id="@drink.idDrink" autocomplete="off">
+                                    <label class="item_modal_drink fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="@drink.Name.ToLower()">@drink.Name</label>
+                                </div>
+                            }
                         }
                     </div>
                     @if (Model.ComboId == "D")
