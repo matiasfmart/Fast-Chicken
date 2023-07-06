@@ -22,10 +22,17 @@
                     @foreach( var item in Model.Items)
                      {
                          <tr>
-                                <td class="ticketCantidad" valign="top">@item.Count</td>
-                                <td class="ticketConcepto1" valign="top">@item.Name</td>
-                                <td class="ticketSubTotal" valign="top">@string.Format("{0:C}", @item.Price) C/u </td>
-                        </tr>
+                             <td class="ticketCantidad" valign="top">@item.Count</td>
+                             @if (item.Type == "PO")
+                             {
+                                 <td class="ticketConcepto1" valign="top">@item.Name @(item.Spicy ? "Con picante" : "Sin picante")</td>
+                             }
+                             else
+                             {
+                                 <td class="ticketConcepto1" valign="top">@item.Name</td>
+                             }
+                             <td class="ticketSubTotal" valign="top">@string.Format("{0:C}", @item.Price) C/u </td>
+                         </tr>
                             @if( item.idDrink != -1 )
                             {
                             <tr><td>&nbsp;</td><td class="ticketConcepto2">@item.Drink @(item.Ice ? " con hielo" : " sin hielo")</td><td>&nbsp;</td></tr>                                
@@ -62,12 +69,20 @@
                             <td class="ticketSubTitle">DETALLE</td>
                             <td class="ticketSubTitle">TOTAL</td>
                         </tr>
-                        <tr><td colspan="3"><hr class="line" /><td></tr>
+                        <tr>
+                        <td colspan="3"><hr class="line" /><td></tr>
                         @foreach (var item in Model.Items)
                         {
                             <tr>
                                 <td class="ticketCantidad" valign="top">@item.Count</td>
-                                <td class="ticketConcepto1" valign="top">@item.Name</td>
+                                @if (item.Type == "PO")
+                                {
+                                    <td class="ticketConcepto1" valign="top">@item.Name @(item.Spicy ? "Con picante" : "Sin picante")</td>
+                                }
+                                else
+                                {
+                                    <td class="ticketConcepto1" valign="top">@item.Name</td>
+                                }
                                 <td class="ticketSubTotal" valign="top">@string.Format("{0:C}", @item.Price) C/u </td>
                             </tr>
                             @if (item.idDrink != -1)
@@ -106,7 +121,7 @@
         <div class="col">
             <h2 class="text-success">Pedido Realizado <i class="bi bi-check2-circle"></i></h2>
             <a class="btn btn-primary btn-lg p-3 m-3" asp-controller="Home" asp-action="Order">Nuevo Pedido</a>
-            <a class="btn btn-primary btn-lg p-3 m-3" asp-controller="Home" asp-action="FinishDay" onclick="FinishDay();">Terminar Dia</a>
+            <a class="btn btn-primary btn-lg p-3 m-3" onclick="FinishJournal();">Terminar Jornada</a>
         </div>
     </div>
 </div>

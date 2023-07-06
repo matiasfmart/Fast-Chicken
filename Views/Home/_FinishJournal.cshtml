@@ -1,0 +1,38 @@
+﻿@model FastChicken.Models.TotalJournal
+<div class="print">
+    <table width="100%">
+        <tr><td align="center">
+            <div id="ticketTotalJournal">
+                <table class="tableTicket">
+                    <tr>
+                        <td class="ticketLogo">FastChicken</td>
+                    </tr>
+                    <tr>
+                        <td class="ticketTitle">RESUMEN DE JORNADA</td>
+                    </tr>
+                    <tr>
+                        <td class="ticketSubTitle">INICIO: @string.Format("{0:dd/MM/yyyy HH:mm}", Model.StartJournalDate)</td>
+                    </tr>
+                    <tr>
+                        <td class="ticketSubTitle">FINAL: @string.Format("{0:dd/MM/yyyy HH:mm}", Model.EndJournalDate)</td>
+                    </tr>
+                    <tr>
+                        <td class="ticketSubTitle">CANTIDAD DE ORDENES: @Model.OrdersCount</td>
+                    </tr>
+                    <tr>
+                        <td class="ticketLogo">TOTAL: @string.Format("{0:C}", Model.Total)</td>
+                    </tr>
+                </table>
+            </div>
+        </td></tr>
+    </table>
+</div>
+
+<div id="alertFinish" class="container text-center d-flex justify-content-center screen">
+    <div class="row align-items-center">
+        <div class="col">
+            <h2 class="text-primary">Jornada Terminada<i class="bi bi-check2-circle"></i></h2>
+            <a class="btn btn-primary btn-lg p-3 m-3" asp-controller="Home" asp-action="Order">Nuevo Pedido</a>
+        </div>
+    </div>
+</div>

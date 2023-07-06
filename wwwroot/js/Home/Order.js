@@ -13,8 +13,33 @@ function ClearMessage() {
     $("#msg-container").html("");
 }
 
-function FinishDay() {
-//    orderNum = 0;
+//function StartOrder() {
+
+//    $.ajax({
+//        url: '/Home/Order',
+//        type: 'GET',
+//        success: function (response) {
+//            console.log(response);
+//        },
+//        error: function (xhr, status, error) {
+//            console.log(error);
+//        }
+//    });
+
+//}
+
+function FinishJournal() {
+
+    $('#orderView').load('/Home/FinishJournal', function (response, status, xhr) {
+        debugger
+        if (status == 'success') {
+
+            $('#dialog').modal('hide');
+
+            $('#ticketTotalJournal').show();
+            window.print();
+        }
+    })
 }
 
 function FinishOrder() {
@@ -99,6 +124,17 @@ function GetOrderItem(id, name, price, type) {
     let idSide = -1;
     let quantity = 0;
     let count = 0;
+    let spicy = false;
+
+    if (type == "PO") {
+        if ($('input[type="radio"][name="spicy"][id=conSp]').prop('checked')) {
+            spicy = true;
+        } else if ($('input[type="radio"][name="spicy"][id=sinSp]').prop('checked')) {
+            spicy = false
+        } else {
+            return false;
+        }
+    }
 
     count = 0;
     $('input[type="radio"][name="drink"]').each(function () {
@@ -178,6 +214,7 @@ function GetOrderItem(id, name, price, type) {
         IdDrink: idDrink,
         Ice: ice,
         Type: type,
+        Spicy: spicy,
         Count: 1
     }
     //if ($('input[type="radio"][name="ice"][id=con]').prop('checked')) {
