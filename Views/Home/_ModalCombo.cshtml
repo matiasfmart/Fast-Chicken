@@ -21,6 +21,7 @@
                             </div>
                         }
                     </div>
+
                     @if (Model.ComboId != "DG")
                     {
                         <div class="row mb-4">
@@ -38,17 +39,31 @@
                 <hr>
             }
             @if (ViewBag.Sides.Count > 0)
-            {               
+            {
                 <h4 class="mb-3 fw-bold">Guarnicion</h4>
                 <div class="container">
                     <div class="row mb-4">
-                        @foreach( var side in ViewBag.Sides)
+                        @foreach (var side in ViewBag.Sides)
                         {
                             <div class="col text-center">
                                 <input type="radio" class="btn-check" name="side" onchange="changeSide('@side.Name.ToLower()')" id="@side.Name.ToLower()" data-quantity="@side.Quantity" data-name="@side.Name" data-id="@side.idSide" autocomplete="off">
                                 <label class="item_modal_side fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="@side.Name.ToLower()">@side.Name</label>
                             </div>
                         }
+                    </div>
+                </div>
+                <hr>
+            }
+            @if (Model.Type == "PO")
+            {
+                <div class="row mb-4">
+                    <div class="col text-center">
+                        <input type="radio" class="btn-check" name="spicy" id="conSp" autocomplete="off">
+                        <label class="item_modal_ice fw-semibold btn btn-outline-success py-3 px-4 shadow-sm rounded" for="conSp">Con Picante</label>
+                    </div>
+                    <div class="col text-center">
+                        <input type="radio" class="btn-check" name="spicy" id="sinSp" autocomplete="off">
+                        <label class="item_modal_ice fw-semibold btn btn-outline-success py-3 px-4 shadow-sm rounded" for="sinSp">Sin Picante</label>
                     </div>
                 </div>
                 <hr>

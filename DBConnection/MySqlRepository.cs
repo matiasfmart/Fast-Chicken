@@ -240,14 +240,41 @@ namespace FastChicken.DBConnection
             }
         }
 
-        private void Update()
+        public TotalJournal GetTotalJournal(int idJournal)
         {
+            TotalJournal totalJournal = null;
+            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            {
+                connection.Open();
+                string SQL = "SELECT COUNT(*) AS Ordenes, " +
+                                    "SUM(Total) AS Total, " +
+                                    "J.StartDate AS StartJournalDate, " +
+                                    "J.EndDate AS EndJournalDate " +
+                                "FROM fastchicken.Orders O JOIN fastchicken.CashJournals J " +
+                                "ON O.idCashJournal=J.idCashJournal " +
+                                "WHERE O.idCashJournal=@idCashJournal";
 
-        }
-        private void Delete()
-        {
+                MySqlCommand mySqlCommand = new MySqlCommand(SQL, connection);
 
+                mySqlCommand.Parameters.AddWithValue("@idCashJournal", idJournal);
+
+                using (var reader = mySqlCommand.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        totalJournal = new TotalJournal();
+                        totalJournal.OrdersCount = reader.GetInt32(0);
+                        totalJournal.Total = reader.GetInt32(1);
+                        totalJournal.StartJournalDate = reader.GetDateTime(2);
+                        totalJournal.EndJournalDate = reader.GetDateTime(3);
+                    }
+                }
+
+                mySqlCommand.Dispose();
+            }
+            return totalJournal;
         }
+
         public Drink getDrink(int id)
         {
             Drink drink = null;

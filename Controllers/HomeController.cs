@@ -249,14 +249,15 @@ namespace FastChicken.Controllers
             return PartialView("_FinishOrder", newOrder);
         }
 
-        public IActionResult FinishDay()
+        public IActionResult FinishJournal()
         {
-            //orderId = 0;
-            //ViewBag.Total = 0;
-            _mySqlRepository.endCashJournal();
-            
+            TotalJournal totalJournal = new TotalJournal();
+
+            int idJournal = _mySqlRepository.endCashJournal();
+            totalJournal = _mySqlRepository.GetTotalJournal(idJournal);
+
             //RedirectToAction("Index", "Home");
-            return View("Index");
+            return PartialView("_FinishJournal", totalJournal);
         }
 
     }

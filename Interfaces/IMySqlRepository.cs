@@ -10,7 +10,6 @@ namespace FastChicken.Interfaces
         int AddOrder(Order newOrder);
         void AddOrderItem(OrderItem newOrderItem);
         int getNewNumOrder();
-
         int startCashJournal();
         int endCashJournal();
         bool checkPassword(string username, string password);
@@ -35,5 +34,6 @@ namespace FastChicken.Interfaces
         void DecrementDrink(int idDrink, int value);
         void DecrementSide(int idSide, int value);
         int GetComboQuantity(string comboId, int idDetail, string Type);
+        TotalJournal GetTotalJournal(int idJournal);
     }
 }
