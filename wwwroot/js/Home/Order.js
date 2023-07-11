@@ -126,7 +126,7 @@ function GetOrderItem(id, name, price, type) {
     let count = 0;
     let spicy = false;
 
-    if (type == "PO") {
+    if (type == "PO" && id != "CR" && id != "PP" && id != "NU") {
         if ($('input[type="radio"][name="spicy"][id=conSp]').prop('checked')) {
             spicy = true;
         } else if ($('input[type="radio"][name="spicy"][id=sinSp]').prop('checked')) {
