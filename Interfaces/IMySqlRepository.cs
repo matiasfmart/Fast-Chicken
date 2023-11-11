@@ -17,6 +17,7 @@ namespace FastChicken.Interfaces
         IList<Drink> getBigDrinks();
         IList<Side> getSides();
         Drink getDrink(int id);
+        Drink getBigDrink(int id);
         Side getSide(int id);
         Product getProduct(int id);
         IList<Drink> getDrinksByCombo(string comboId);
@@ -25,6 +26,7 @@ namespace FastChicken.Interfaces
         IList<Product> getProducts();
         IList<Combo> getCombos();
         void UpdateDrinksQty(int idDrink, double quantity);
+        void UpdateBigDrinksQty(int idDrink, double quantity);
         void UpdateProductsQty(int idProduct, double quantity);
         void UpdateSidesQty(int idSide, double quantity);
         Combo GetCombo(string id);
@@ -35,5 +37,10 @@ namespace FastChicken.Interfaces
         void DecrementSide(int idSide, int value);
         int GetComboQuantity(string comboId, int idDetail, string Type);
         TotalJournal GetTotalJournal(int idJournal);
+
+        void GrabarDrink(Drink drink);
+        void GrabarSide(Side side);
+        void GrabarProduct(Product product);
+        void GrabarBigDrink(Drink drink);
     }
 }

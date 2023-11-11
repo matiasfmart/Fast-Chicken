@@ -12,6 +12,7 @@
                     <th class="col-1 text-center">&nbsp;</th>
                     <th class="col-1 text-center">&nbsp;</th>
                     <th class="col-1 text-center">&nbsp;</th>
+                    <th class="col-1 text-center">&nbsp;</th>
                 </tr>
             </thead>
             <tbody scope="table-group-divider">
@@ -32,6 +33,13 @@
                         <td class="col-1 text-center"><button type="button" onclick="Quitar(@side.idSide)" class="btn btn-danger">Quitar</button></td>
                         <td class="col-1 text-center"><button type="button" onclick="Agregar(@side.idSide)" class="btn btn-success">Agregar</button></td>
                         <td class="col-1 text-center"><input type="text" id="value_@side.idSide" class="form-control"></td>
+                        <td class="col-1 text-center">
+                            <a href="@Url.Action("Guarnicion", "Admin", new { id = @side.idSide })">
+                                <button type="button" class="btn btn-success">
+                                    Editar
+                                </button>
+                            </a>
+                        </td>
                     </tr>
                 }
             </tbody>

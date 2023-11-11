@@ -42,6 +42,28 @@ namespace FastChicken.Controllers.Api
   
             return result;
         }
+        [HttpPost]
+        public ResultModel ActualizaStockBebidasGrandes(IList<Drink> drinkValues)
+        {
+            var result = new ResultModel();
+
+            try
+            {
+                foreach (var drink in drinkValues)
+                {
+                    this._mySqlRepository.UpdateBigDrinksQty(drink.idDrink, drink.Quantity);
+                }
+
+                result.Status = "OK";
+            }
+            catch (Exception ex)
+            {
+                result.Status = "Error";
+                result.Message = ex.Message;
+            }
+
+            return result;
+        }
 
         [HttpPost]
         public ResultModel ActualizaStockGuarniciones(IList<Side> sideValues)
@@ -96,6 +118,83 @@ namespace FastChicken.Controllers.Api
             try
             {
                 this._mySqlRepository.GrabarCombo(combo);
+
+                result.Status = "OK";
+            }
+            catch (Exception ex)
+            {
+                result.Status = "Error";
+                result.Message = ex.Message;
+            }
+
+            return result;
+        }
+        [HttpPost]
+        public ResultModel GrabarBebida(Drink drink)
+        {
+            var result = new ResultModel();
+
+            try
+            {
+                this._mySqlRepository.GrabarDrink(drink);
+
+                result.Status = "OK";
+            }
+            catch (Exception ex)
+            {
+                result.Status = "Error";
+                result.Message = ex.Message;
+            }
+
+            return result;
+        }
+
+        [HttpPost]
+        public ResultModel GrabarBebidaGrande(Drink drink)
+        {
+            var result = new ResultModel();
+
+            try
+            {
+                this._mySqlRepository.GrabarBigDrink(drink);
+
+                result.Status = "OK";
+            }
+            catch (Exception ex)
+            {
+                result.Status = "Error";
+                result.Message = ex.Message;
+            }
+
+            return result;
+        }
+        [HttpPost]
+        public ResultModel GrabarProducto(Product product)
+        {
+            var result = new ResultModel();
+
+            try
+            {
+                this._mySqlRepository.GrabarProduct(product);
+
+                result.Status = "OK";
+            }
+            catch (Exception ex)
+            {
+                result.Status = "Error";
+                result.Message = ex.Message;
+            }
+
+            return result;
+        }
+        [HttpPost]
+        public ResultModel GrabarGuarnicion(Side side)
+        {
+            var result = new ResultModel();
+
+            try
+            {
+                this._mySqlRepository.GrabarSide(side);
 
                 result.Status = "OK";
             }

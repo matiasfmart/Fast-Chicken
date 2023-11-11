@@ -88,9 +88,21 @@ namespace FastChicken.Controllers
         {
             return View();
         }
+        public IActionResult BebidasGrandes()
+        {
+            return View();
+        }
         public IActionResult ListaBebidas()
         {
             IList<Drink> drinks = this._mySqlRepository.getDrinks();
+
+            ViewBag.Drinks = drinks;
+
+            return View();
+        }
+        public IActionResult ListaBebidasGrandes()
+        {
+            IList<Drink> drinks = this._mySqlRepository.getBigDrinks();
 
             ViewBag.Drinks = drinks;
 
@@ -159,6 +171,38 @@ namespace FastChicken.Controllers
             {
                 ViewBag.Combo = combo;
             }
+
+            return View();
+        }
+        public IActionResult Bebida(int id)
+        {
+            Drink drink = this._mySqlRepository.getDrink(id);
+
+            ViewBag.Drink = drink;
+
+            return View();
+        }
+        public IActionResult BebidaGrande(int id)
+        {
+            Drink drink = this._mySqlRepository.getBigDrink(id);
+
+            ViewBag.Drink = drink;
+
+            return View();
+        }
+        public IActionResult Guarnicion(int id)
+        {
+            Side side = this._mySqlRepository.getSide(id);
+
+            ViewBag.Side = side;
+
+            return View();
+        }
+        public IActionResult Producto(int id)
+        {
+            Product product = this._mySqlRepository.getProduct(id);
+
+            ViewBag.Product = product;
 
             return View();
         }

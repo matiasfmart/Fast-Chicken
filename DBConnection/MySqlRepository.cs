@@ -302,6 +302,33 @@ namespace FastChicken.DBConnection
             }
             return drink;
         }
+        public Drink getBigDrink(int id)
+        {
+            Drink drink = null;
+            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            {
+                connection.Open();
+                string SQL = "select idDrink, Name, Price, Quantity from BigDrinks WHERE idDrink=@idDrink";
+                MySqlCommand mySqlCommand = new MySqlCommand(SQL, connection);
+
+                mySqlCommand.Parameters.AddWithValue("@idDrink", id);
+
+                using (var reader = mySqlCommand.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        drink = new Drink();
+                        drink.idDrink = reader.GetInt32(0);
+                        drink.Name = reader.GetString(1);
+                        drink.Price = reader.GetDouble(2);
+                        drink.Quantity = reader.GetInt32(3);
+                    }
+                }
+
+                mySqlCommand.Dispose();
+            }
+            return drink;
+        }
 
         public Side getSide(int id)
         {
@@ -598,6 +625,24 @@ namespace FastChicken.DBConnection
                 MySqlCommand mySqlCommand = connection.CreateCommand();
 
                 mySqlCommand.CommandText = "UPDATE Drinks SET Quantity=@Quantity WHERE idDrink=@idDrink";
+
+                mySqlCommand.Parameters.AddWithValue("@idDrink", idDrink);
+                mySqlCommand.Parameters.AddWithValue("@Quantity", quantity);
+
+                mySqlCommand.ExecuteNonQuery();
+
+                mySqlCommand.Dispose();
+            }
+        }
+        public void UpdateBigDrinksQty(int idDrink, double quantity)
+        {
+            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                MySqlCommand mySqlCommand = connection.CreateCommand();
+
+                mySqlCommand.CommandText = "UPDATE BigDrinks SET Quantity=@Quantity WHERE idDrink=@idDrink";
 
                 mySqlCommand.Parameters.AddWithValue("@idDrink", idDrink);
                 mySqlCommand.Parameters.AddWithValue("@Quantity", quantity);
@@ -952,6 +997,101 @@ namespace FastChicken.DBConnection
             }
 
             return quantity;
+        }
+
+        public void GrabarBigDrink(Drink drink)
+        {
+            if (drink.idDrink <= 0)
+            {
+                throw new Exception("Id no válido");
+            }
+
+            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                MySqlCommand mySqlCommand = connection.CreateCommand();
+
+                mySqlCommand.CommandText = "UPDATE BigDrinks SET Price = @Price WHERE idDrink = @idDrink";
+
+                mySqlCommand.Parameters.AddWithValue("@Price", drink.Price);
+                mySqlCommand.Parameters.AddWithValue("@idDrink", drink.idDrink);
+
+                mySqlCommand.ExecuteNonQuery();
+
+                mySqlCommand.Dispose();
+            }
+
+        }
+
+        public void GrabarDrink(Drink drink)
+        {
+            if (drink.idDrink <= 0 ) {
+                throw new Exception("Id no válido");
+            }
+
+            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                MySqlCommand mySqlCommand = connection.CreateCommand();
+
+                mySqlCommand.CommandText = "UPDATE Drinks SET Price = @Price WHERE idDrink = @idDrink";
+
+                mySqlCommand.Parameters.AddWithValue("@Price", drink.Price);
+                mySqlCommand.Parameters.AddWithValue("@idDrink", drink.idDrink);
+
+                mySqlCommand.ExecuteNonQuery();
+
+                mySqlCommand.Dispose();
+            }
+
+        }
+        public void GrabarProduct(Product product)
+        {
+            if (product.idProduct <= 0)
+            {
+                throw new Exception("Id no válido");
+            }
+
+            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                MySqlCommand mySqlCommand = connection.CreateCommand();
+
+                mySqlCommand.CommandText = "UPDATE Products SET Price = @Price WHERE idProduct = @idProduct";
+
+                mySqlCommand.Parameters.AddWithValue("@Price", product.Price);
+                mySqlCommand.Parameters.AddWithValue("@idProduct", product.idProduct);
+
+                mySqlCommand.ExecuteNonQuery();
+
+                mySqlCommand.Dispose();
+            }
+        }
+        public void GrabarSide(Side side)
+        {
+            if (side.idSide <= 0)
+            {
+                throw new Exception("Id no válido");
+            }
+
+            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                MySqlCommand mySqlCommand = connection.CreateCommand();
+
+                mySqlCommand.CommandText = "UPDATE Sides SET Price = @Price WHERE idSide = @idSide";
+
+                mySqlCommand.Parameters.AddWithValue("@Price", side.Price);
+                mySqlCommand.Parameters.AddWithValue("@idSide", side.idSide);
+
+                mySqlCommand.ExecuteNonQuery();
+
+                mySqlCommand.Dispose();
+            }
         }
     }
 }

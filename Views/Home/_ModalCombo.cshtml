@@ -16,7 +16,7 @@
                         @foreach (var drink in ViewBag.Drinks)
                         {
                             <div class="col-md-3 text-center">
-                                <input type="radio" class="btn-check" name="drink" id="@drink.Name.ToLower()" data-quantity="@drink.Quantity" data-name="@drink.Name" data-id="@drink.idDrink" autocomplete="off">
+                                <input type="radio" class="btn-check" onchange="onChangeDrink('@drink.Price')" name="drink" id="@drink.Name.ToLower()" data-quantity="@drink.Quantity" data-name="@drink.Name" data-id="@drink.idDrink" data-price="@drink.Price" autocomplete="off">
                                 <label class="item_modal_drink fw-semibold btn btn-outline-primary py-3 px-4 shadow-sm rounded" for="@drink.Name.ToLower()">@drink.Name</label>
                             </div>
                         }
@@ -54,21 +54,8 @@
                 </div>
                 <hr>
             }
-            @if (Model.Type == "PO" && Model.ComboId != "CR" && Model.ComboId != "PP" && Model.ComboId != "NU")
-            {
-                <div class="row mb-4">
-                    <div class="col text-center">
-                        <input type="radio" class="btn-check" name="spicy" id="conSp" autocomplete="off">
-                        <label class="item_modal_ice fw-semibold btn btn-outline-success py-3 px-4 shadow-sm rounded" for="conSp">Con Picante</label>
-                    </div>
-                    <div class="col text-center">
-                        <input type="radio" class="btn-check" name="spicy" id="sinSp" autocomplete="off">
-                        <label class="item_modal_ice fw-semibold btn btn-outline-success py-3 px-4 shadow-sm rounded" for="sinSp">Sin Picante</label>
-                    </div>
-                </div>
-                <hr>
-            }
-            <h4 class="mb-3 fw-bold text-center">@string.Format("{0:C}", Convert.ToDouble(Model.Price))</h4>
+            <input type="hidden" name="value_price" id="value_price" value="0" />
+            <h4 class="mb-3 fw-bold text-center" id="display_price">@string.Format("{0:C}", Convert.ToDouble(Model.Price))</h4>
         </div>
 
         <div id="msg-container">

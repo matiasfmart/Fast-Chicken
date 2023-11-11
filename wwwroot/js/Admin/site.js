@@ -4,6 +4,12 @@ function LoadBebidas() {
         }
     })
 }
+function LoadBebidasGrandes() {
+    $('#ListaBebidasGrandes').load('/Admin/ListaBebidasGrandes', function () {
+        if (status == 'success') {
+        }
+    })
+}
 
 function LoadGuarniciones() {
     $('#ListaGuarniciones').load('/Admin/ListaGuarniciones', function () {
@@ -52,9 +58,38 @@ $('#btnActualizarBebidas').click(function (e) {
     });
 
 });
+$('#btnActualizarBebidasGrandes').click(function (e) {
+
+    var ids = [];
+
+    $("div[id^='quantity_']").each(function (item, index) {
+        ids.push({
+            idDrink: $(this).data("id"),
+            Name: "",
+            Price: 0.0,
+            Quantity: $(this).data("quantity")
+        });
+    });
+
+    $.ajax({
+        url: '/api/Admin/ActualizaStockBebidasGrandes',
+        type: 'POST',
+        dataType: "JSON",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(ids)
+    }).done(function (data) {
+        if (data.Status == "OK") {
+            LoadBebidas();
+        }
+    });
+
+});
 
 $('#btnDeshacerBebidas').click(function (e) {
     LoadBebidas();
+});
+$('#btnDeshacerBebidasGrandes').click(function (e) {
+    LoadBebidasGrandes();
 });
 
 $('#btnActualizarGuarniciones').click(function (e) {
@@ -138,6 +173,86 @@ function Agregar(id) {
     $('#quantity_' + id).data('quantity', quantity + value);
 }
 
+function GrabarBebidaGrande() {
+    var data = {
+        idDrink: $('#Id').val(),
+        Price: $('#Price').val()
+    };
+
+
+    $.ajax({
+        url: '/api/Admin/GrabarBebidaGrande',
+        type: 'POST',
+        dataType: "JSON",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(data)
+    }).done(function (data) {
+        if (data.Status == "OK") {
+
+        }
+    });
+}
+
+function GrabarBebida() {
+    var data = {
+        idDrink: $('#Id').val(),
+        Price: $('#Price').val()
+    };
+
+
+    $.ajax({
+        url: '/api/Admin/GrabarBebida',
+        type: 'POST',
+        dataType: "JSON",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(data)
+    }).done(function (data) {
+        if (data.Status == "OK") {
+
+        }
+    });
+}
+
+function GrabarGuarnicion() {
+    var data = {
+        idSide: $('#Id').val(),
+        Price: $('#Price').val()
+    };
+
+
+    $.ajax({
+        url: '/api/Admin/GrabarGuarnicion',
+        type: 'POST',
+        dataType: "JSON",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(data)
+    }).done(function (data) {
+        if (data.Status == "OK") {
+
+        }
+    });
+}
+
+function GrabarProducto() {
+
+    var data = {
+        idProduct: $('#Id').val(),
+        Price: $('#Price').val()
+    };
+
+    $.ajax({
+        url: '/api/Admin/GrabarProducto',
+        type: 'POST',
+        dataType: "JSON",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(data)
+    }).done(function (data) {
+        if (data.Status == "OK") {
+
+        }
+    });
+}
+
 function GrabarCombo() {
 
     var data = {
@@ -168,8 +283,6 @@ function GrabarCombo() {
             data.Products.push({ idCombo: data.ComboId, Type: "P", Quantity: $("#CantidadProductos").val(), idDetail: $(this).val() });
         }
     });
-
-    console.log(data);
 
     $.ajax({
         url: '/api/Admin/GrabarCombo',

@@ -95,6 +95,13 @@ document.addEventListener('DOMContentLoaded', function (event) {
     LoadCombosList();
 })
 
+function onChangeDrink(price) {
+
+    $("#value_price").val(price);
+
+    $("#display_price").html( "$ " + parseFloat(price).toFixed(2).replace(/\./g, ',') );
+}
+
 function LoadComboModal(id, name, type, price) {
     var combo = GetCombo(id, name, type, price);
     $('#dialog').load('/Home/LoadComboModal', { combo: combo }, function (response, status, xhr) {
@@ -252,6 +259,11 @@ function DecrementExistItem(id) {
 var orderItems = [];
 function AddItem(id, name, price, type) {
     debugger
+
+    if (type === 'E') {
+        price = $('#value_price').val();
+    }
+
     var item = GetOrderItem(id, name, price, type);
     var existItem = orderItems.find((e) => {
         return (e.ComboId === id && e.Name === item.Name && e.Price === item.Price && e.IdSide === item.IdSide && e.IdDrink === item.IdDrink && e.Ice === item.Ice);

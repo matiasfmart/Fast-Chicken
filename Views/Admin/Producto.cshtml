@@ -1,0 +1,48 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_LayoutAdmin";
+
+    <div class="container mt-4">
+        <div class="row d-flex justify-content-between">
+            <div class="col">
+                <h1>Control de Stock &nbsp;<i class="bi bi-box-seam-fill"></i></h1>
+            </div>
+        </div>
+    </div>
+    <div class="container shadow bg-white mt-4">
+        <div class="row px-4">
+        <p>
+            <form class="row g-3">
+                <div class="col-md-6">
+                    <label for="Id" class="form-label">Id</label>
+                        <input type="text" class="form-control" id="Id" value="@ViewBag.Product.idProduct">
+                </div>
+                <div class="col-md-6">
+                    <label for="Type" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="Name" value="@ViewBag.Product.Name">
+                </div>
+                <div class="col-md-6">
+                    <label for="Name" class="form-label">Precio</label>
+                        <input type="text" class="form-control" id="Price" value="@ViewBag.Product.Price">
+                </div>
+                </form>
+            </p>
+        </div>
+    </div>
+
+    <div class="container shadow bg-white mt-4">
+        <div class="row px-4">
+            <p>
+            <div class="col-12">
+                <button type="button" onclick="GrabarProducto()" class="btn btn-primary">Grabar</button>
+                <a href="@Url.Action("Productos", "Admin")">
+                <button type="button" class="btn btn-danger">Volver</button>
+                </a>
+            </div>
+            </p>
+        </div>
+    </div>
+
+}

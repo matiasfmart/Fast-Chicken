@@ -16,31 +16,31 @@
                 </tr>
             </thead>
             <tbody scope="table-group-divider">
-                @foreach(var product in ViewBag.Products)
+                @foreach(var drink in ViewBag.Drinks)
                 {
                     <tr>
-                        <td scope="col">@product.Name</td>
+                        <td scope="col">@drink.Name</td>
                         <td class="col-1 text-center">
                             <div class="badge bg-primary text-wrap fs-6">
-                                @product.Quantity
+                                @drink.Quantity
                             </div>
                         </td>
                         <td class="col-1 text-center">
-                            <div id="quantity_@product.idProduct" data-id="@product.idProduct" data-quantity="@product.Quantity" class="badge bg-warning text-wrap fs-6">
-                                @product.Quantity
+                            <div id="quantity_@drink.idDrink" data-id="@drink.idDrink" data-quantity="@drink.Quantity" class="badge bg-warning text-wrap fs-6">
+                                @drink.Quantity
                             </div>
                         </td>
-                        <td class="col-1 text-center"><button type="button" onclick="Quitar(@product.idProduct)" class="btn btn-danger">Quitar</button></td>
-                        <td class="col-1 text-center"><button type="button" onclick="Agregar(@product.idProduct)" class="btn btn-success">Agregar</button></td>
-                        <td class="col-1 text-center"><input type="text" id="value_@product.idProduct" class="form-control"></td>
+                        <td class="col-1 text-center"><button type="button" onclick="Quitar(@drink.idDrink)" class="btn btn-danger">Quitar</button></td>
+                        <td class="col-1 text-center"><button type="button" onclick="Agregar(@drink.idDrink)" class="btn btn-success">Agregar</button></td>
+                        <td class="col-1 text-center"><input type="text" id="value_@drink.idDrink" class="form-control"></td>
                         <td class="col-1 text-center">
-                            <a href="@Url.Action("Producto", "Admin", new { id = @product.idProduct })">
+                            <a href="@Url.Action("BebidaGrande", "Admin", new { id = @drink.idDrink })">
                                 <button type="button" class="btn btn-success">
                                     Editar
                                 </button>
                             </a>
                         </td>
-                    </tr>
+                     </tr>
                 }
             </tbody>
         </table>
