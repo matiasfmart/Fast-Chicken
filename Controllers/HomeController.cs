@@ -84,7 +84,7 @@ namespace FastChicken.Controllers
             comboBebidaChica.ComboId = "D";
             comboBebidaChica.Description = "";
             comboBebidaChica.Type = "E";
-            comboBebidaChica.Price = "350";
+            comboBebidaChica.Price = "600";
 
             combos.Add(comboBebidaChica);
 
@@ -94,7 +94,7 @@ namespace FastChicken.Controllers
             comboBebidaGrande.ComboId = "DG";
             comboBebidaGrande.Description = "";
             comboBebidaGrande.Type = "E";
-            comboBebidaGrande.Price = "900";
+            comboBebidaGrande.Price = "1800";
 
             combos.Add(comboBebidaGrande);
 
