@@ -7,7 +7,7 @@
     <div class="container mt-4">
         <div class="row d-flex justify-content-between">
             <div class="col">
-                <h1>Control de Stock &nbsp;<i class="bi bi-box-seam-fill"></i></h1>
+                <h1>Control de Stock &nbsp;<i class="bi bi-box-seam-fill"></i> > Combos > @ViewBag.Combo.Name</h1>
             </div>
         </div>
     </div>
@@ -17,11 +17,11 @@
             <form class="row g-3">
                 <div class="col-md-6">
                     <label for="Id" class="form-label">Id</label>
-                        <input type="text" class="form-control" id="Id" value="@ViewBag.Combo.ComboId">
+                        <input type="text" class="form-control" id="Id" value="@ViewBag.Combo.ComboId" disabled>
                 </div>
                 <div class="col-md-6">
                     <label for="Type" class="form-label">Tipo</label>
-                        <input type="text" class="form-control" id="Type" value="@ViewBag.Combo.Type">
+                        <input type="text" class="form-control" id="Type" value="@ViewBag.Combo.Type" disabled>
                 </div>
                 <div class="col-md-6">
                     <label for="Name" class="form-label">Nombre</label>
